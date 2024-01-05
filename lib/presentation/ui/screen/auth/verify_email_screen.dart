@@ -1,5 +1,7 @@
+import 'package:crafty_bay/presentation/ui/screen/auth/verify_otp_screen.dart';
 import 'package:crafty_bay/presentation/ui/widgets/app_logo.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class VerifyEmailScreen extends StatefulWidget {
   const VerifyEmailScreen({super.key});
@@ -40,7 +42,9 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(const VerifyOtpScreen());
+                  },
                   child: const Text('Next'),
                 ),
               )
