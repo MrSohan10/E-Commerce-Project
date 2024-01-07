@@ -46,6 +46,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
               height: 24,
             ),
             PinCodeTextField(
+              cursorColor: AppColors.primaryColor,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               appContext: context,
               length: 4,

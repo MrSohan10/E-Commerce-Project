@@ -3,6 +3,8 @@ import 'package:crafty_bay/presentation/ui/widgets/app_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../utility/app_colors.dart';
+
 class VerifyEmailScreen extends StatefulWidget {
   const VerifyEmailScreen({super.key});
 
@@ -34,6 +36,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                 height: 24,
               ),
               TextFormField(
+                cursorColor: AppColors.primaryColor,
                 decoration: const InputDecoration(labelText: 'Email Address'),
               ),
               const SizedBox(

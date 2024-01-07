@@ -2,6 +2,7 @@ import 'package:crafty_bay/presentation/ui/screen/main_bottom_nav_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../utility/app_colors.dart';
 import '../../widgets/app_logo.dart';
 
 class CompleteProfileScreen extends StatefulWidget {
@@ -35,27 +36,32 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                 height: 24,
               ),
               TextFormField(
+                cursorColor: AppColors.primaryColor,
                 textInputAction: TextInputAction.next,
                 decoration: const InputDecoration(labelText: 'First Name'),
               ),
               const SizedBox(height: 16),
               TextFormField(
+                cursorColor: AppColors.primaryColor,
                 textInputAction: TextInputAction.next,
                 decoration: const InputDecoration(labelText: 'Last Name'),
               ),
               const SizedBox(height: 16),
               TextFormField(
+                cursorColor: AppColors.primaryColor,
                 textInputAction: TextInputAction.next,
                 keyboardType: TextInputType.phone,
                 decoration: const InputDecoration(labelText: 'Mobile'),
               ),
               const SizedBox(height: 16),
               TextFormField(
+                cursorColor: AppColors.primaryColor,
                 textInputAction: TextInputAction.next,
                 decoration: const InputDecoration(labelText: 'City'),
               ),
               const SizedBox(height: 16),
               TextFormField(
+                cursorColor: AppColors.primaryColor,
                 textInputAction: TextInputAction.done,
                 maxLines: 3,
                 decoration:

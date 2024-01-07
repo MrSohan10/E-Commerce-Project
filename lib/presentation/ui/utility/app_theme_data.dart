@@ -4,6 +4,11 @@ import 'app_colors.dart';
 
 class AppThemeData {
   static ThemeData lightTheme = ThemeData(
+      // colorScheme: ColorScheme.fromSeed(
+      //     seedColor: AppColors.primaryColor,
+      //     primary: AppColors.primaryColor,
+      //     background: Colors.white
+      // ),
       progressIndicatorTheme:
           const ProgressIndicatorThemeData(color: AppColors.primaryColor),
       textTheme: TextTheme(
@@ -19,6 +24,7 @@ class AppThemeData {
       ),
       inputDecorationTheme: InputDecorationTheme(
         labelStyle: TextStyle(color: Colors.grey.shade400),
+        hintStyle: TextStyle(color: Colors.grey.shade400),
         contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         enabledBorder: const OutlineInputBorder(
           borderSide: BorderSide(color: AppColors.primaryColor, width: 1.5),
@@ -46,10 +52,7 @@ class AppThemeData {
         ),
       ),
       textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          foregroundColor: AppColors.primaryColor
-        )
-      )
+          style: TextButton.styleFrom(foregroundColor: AppColors.primaryColor))
       // primarySwatch: MaterialColor(
       //   AppColors.primaryColor.value,
       //   AppColors.colorSwatch,
