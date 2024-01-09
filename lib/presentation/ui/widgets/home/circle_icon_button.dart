@@ -10,7 +10,7 @@ class CircleIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.circular(20),
+      borderRadius: BorderRadius.circular(15),
       onTap: ontap,
       child: CircleAvatar(
         // radius: 15,

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-import '../../../state_holder/otp_time_decrease.dart';
+import '../../../state_holder/otp_time_decrease_controller.dart';
 import '../../widgets/app_logo.dart';
 import 'complete_profile_screen.dart';
 
@@ -15,7 +15,7 @@ class VerifyOtpScreen extends StatefulWidget {
 }
 
 class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
-  final OtpTimeDecrease _otpTimeDecrease = Get.find<OtpTimeDecrease>();
+  final OtpTimeDecreaseController _otpTimeDecrease = Get.find<OtpTimeDecreaseController>();
 
   @override
   void initState() {
@@ -77,7 +77,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
               ),
             ),
             const SizedBox(height: 24),
-            GetBuilder<OtpTimeDecrease>(builder: (controller) {
+            GetBuilder<OtpTimeDecreaseController>(builder: (controller) {
               return RichText(
                 text: TextSpan(
                   style: const TextStyle(color: Colors.grey),

@@ -1,9 +1,13 @@
+import 'package:crafty_bay/presentation/state_holder/main_bottom_nav_controller.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
 import 'package:crafty_bay/presentation/ui/utility/assets_path.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import '../widgets/category_item.dart';
 import '../widgets/home/banner_carousel.dart';
 import '../widgets/home/circle_icon_button.dart';
 import '../widgets/home/section_title.dart';
+import '../widgets/product_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -29,11 +33,72 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 8),
               SectionTitle(
                 title: 'All Categories',
+                onTapSeeAll: () {
+                  Get.find<MainBottomNavController>().changeIndex(1);
+                },
+              ),
+              categoryList,
+              const SizedBox(height: 8),
+              SectionTitle(
+                title: 'Popular',
                 onTapSeeAll: () {},
-              )
+              ),
+              productList,
+              const SizedBox(height: 8),
+              SectionTitle(
+                title: 'Special',
+                onTapSeeAll: () {},
+              ),
+              productList,
+              const SizedBox(height: 8),
+              SectionTitle(
+                title: 'New',
+                onTapSeeAll: () {},
+              ),
+              productList,
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  SizedBox get categoryList {
+    return SizedBox(
+      height: 100,
+      child: ListView.separated(
+        primary: false,
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return const CategoryItem();
+        },
+        separatorBuilder: (_, __) {
+          return const SizedBox(
+            width: 12,
+          );
+        },
+      ),
+    );
+  }
+
+  SizedBox get productList {
+    return SizedBox(
+      height: 185,
+      child: ListView.separated(
+        primary: false,
+        shrinkWrap: true,
+        scrollDirection: Axis.horizontal,
+        itemCount: 10,
+        itemBuilder: (context, index) {
+          return const ProductCard();
+        },
+        separatorBuilder: (_, __) {
+          return const SizedBox(
+            width: 8,
+          );
+        },
       ),
     );
   }
@@ -64,8 +129,10 @@ class _HomeScreenState extends State<HomeScreen> {
 
   AppBar get appBar {
     return AppBar(
+      elevation: 0,
       title: Image.asset(AssetsPath.logoNav),
-      toolbarHeight: 30,
+      toolbarHeight: 40,
+      backgroundColor: Colors.white,
       actions: [
         CircleIconButton(
           ontap: () {},

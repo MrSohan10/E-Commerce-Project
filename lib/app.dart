@@ -1,8 +1,10 @@
-import 'package:crafty_bay/presentation/state_holder/otp_time_decrease.dart';
+import 'package:crafty_bay/presentation/state_holder/otp_time_decrease_controller.dart';
 import 'package:crafty_bay/presentation/ui/screen/splash_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_theme_data.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
+
+import 'controller_binder.dart';
 
 class CraftyBay extends StatelessWidget {
   const CraftyBay({super.key});
@@ -12,14 +14,8 @@ class CraftyBay extends StatelessWidget {
     return GetMaterialApp(
       home: const SplashScreen(),
       theme: AppThemeData.lightTheme,
-      initialBinding: controllerBinding(),
+      initialBinding: controllerBinder(),
     );
   }
 }
 
-class controllerBinding extends Bindings {
-  @override
-  void dependencies() {
-    Get.put(OtpTimeDecrease());
-  }
-}

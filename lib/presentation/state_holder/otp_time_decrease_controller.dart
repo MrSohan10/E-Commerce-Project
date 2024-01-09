@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:get/get.dart';
 
-class OtpTimeDecrease extends GetxController {
+class OtpTimeDecreaseController extends GetxController {
   int _seconds = 120;
 
   get seconds => _seconds;
