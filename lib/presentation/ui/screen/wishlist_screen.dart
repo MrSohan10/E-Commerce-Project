@@ -21,7 +21,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
       child: Scaffold(
         appBar: appBar,
         body: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.only(left: 12,right: 12),
           child: GridView.builder(
             itemCount: 100,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -50,11 +50,6 @@ class _WishlistScreenState extends State<WishlistScreen> {
         },
       ),
       title: const Text('Wish List'),
-      titleTextStyle: TextStyle(fontSize: 20, color: Colors.grey.shade800),
-      toolbarHeight: 40,
-      elevation: 0.3,
-      shadowColor: Colors.black,
-      backgroundColor: Colors.white,
     );
   }
 }

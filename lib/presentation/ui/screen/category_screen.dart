@@ -22,7 +22,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
       child: Scaffold(
         appBar: appBar,
         body: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.only(left: 14,right: 14),
           child: GridView.builder(
             itemCount: 100,
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -51,11 +51,6 @@ class _CategoryScreenState extends State<CategoryScreen> {
         },
       ),
       title: const Text('Category'),
-      titleTextStyle: TextStyle(fontSize: 20, color: Colors.grey.shade800),
-      toolbarHeight: 40,
-      elevation: 0.3,
-      shadowColor: Colors.black,
-      backgroundColor: Colors.white,
     );
   }
 }

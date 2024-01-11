@@ -1,4 +1,5 @@
 import 'package:crafty_bay/presentation/state_holder/main_bottom_nav_controller.dart';
+import 'package:crafty_bay/presentation/ui/screen/product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
 import 'package:crafty_bay/presentation/ui/utility/assets_path.dart';
 import 'package:flutter/material.dart';
@@ -41,19 +42,25 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 8),
               SectionTitle(
                 title: 'Popular',
-                onTapSeeAll: () {},
+                onTapSeeAll: () {
+                  Get.to(const ProductListScreen());
+                },
               ),
               productList,
               const SizedBox(height: 8),
               SectionTitle(
                 title: 'Special',
-                onTapSeeAll: () {},
+                onTapSeeAll: () {
+                  Get.to(const ProductListScreen());
+                },
               ),
               productList,
               const SizedBox(height: 8),
               SectionTitle(
                 title: 'New',
-                onTapSeeAll: () {},
+                onTapSeeAll: () {
+                  Get.to(const ProductListScreen());
+                },
               ),
               productList,
             ],
@@ -131,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return AppBar(
       elevation: 0,
       title: Image.asset(AssetsPath.logoNav),
-      toolbarHeight: 40,
+      toolbarHeight: 60,
       backgroundColor: Colors.white,
       actions: [
         CircleIconButton(
