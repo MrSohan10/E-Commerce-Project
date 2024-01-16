@@ -1,3 +1,4 @@
+import 'package:crafty_bay/presentation/state_holder/send_otp_to_email_controller.dart';
 import 'package:crafty_bay/presentation/ui/screen/auth/verify_otp_screen.dart';
 import 'package:crafty_bay/presentation/ui/widgets/app_logo.dart';
 import 'package:flutter/material.dart';
@@ -13,48 +14,91 @@ class VerifyEmailScreen extends StatefulWidget {
 }
 
 class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
+  final TextEditingController _emailTEController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(42),
-          child: Column(
-            children: [
-              const SizedBox(height: 150),
-              const AppLogo(height: 100),
-              const SizedBox(height: 10),
-              Text(
-                'Welcome Back',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-              Text(
-                'Please Enter Your Email Address',
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              TextFormField(
-                cursorColor: AppColors.primaryColor,
-                decoration: const InputDecoration(labelText: 'Email Address'),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Get.to(const VerifyOtpScreen());
-                  },
-                  child: const Text('Next'),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                const SizedBox(height: 150),
+                const AppLogo(height: 100),
+                const SizedBox(height: 10),
+                Text(
+                  'Welcome Back',
+                  style: Theme.of(context).textTheme.titleLarge,
                 ),
-              )
-            ],
+                Text(
+                  'Please Enter Your Email Address',
+                  style: Theme.of(context).textTheme.bodySmall,
+                ),
+                const SizedBox(
+                  height: 24,
+                ),
+                TextFormField(
+                  controller: _emailTEController,
+                  cursorColor: AppColors.primaryColor,
+                  decoration: const InputDecoration(labelText: 'Email Address'),
+                  validator: (value) {
+                    if (value!.trim().isEmpty ?? true) {
+                      return 'Enter e-mail address';
+                    } else if (RegExp(
+                            r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                        .hasMatch(value!)) {
+                      return null;
+                    }
+                    return 'invalid e-mail';
+                  },
+                ),
+                const SizedBox(
+                  height: 16,
+                ),
+                GetBuilder<SendOtpToEmailController>(
+                  builder: (controller) {
+                    return SizedBox(
+                      width: double.infinity,
+                      child: Visibility(
+                        visible: controller.inProgress == false,
+                        replacement: const Center(child: CircularProgressIndicator(),),
+                        child: ElevatedButton(
+                          onPressed: () async {
+                            if (_formKey.currentState!.validate()) {
+                            bool result = await  controller.sendOtpToEmail(_emailTEController.text.trim());
+                              if(result){
+                                Get.to(() => const VerifyOtpScreen());
+                              }else{
+                                Get.showSnackbar(GetSnackBar(
+                                  title: 'Send otp failed',
+                                  message: controller.errorMessage ?? "Something went wrong!",
+                                  backgroundColor: Colors.red,
+                                ));
+                              }
+
+                            }
+                          },
+                          child: const Text('Next'),
+                        ),
+                      ),
+                    );
+                  }
+                )
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _emailTEController.dispose();
+    super.dispose();
   }
 }
