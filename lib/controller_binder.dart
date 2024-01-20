@@ -1,6 +1,8 @@
 import 'package:crafty_bay/presentation/state_holder/main_bottom_nav_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/otp_time_decrease_controller.dart';
+import 'package:crafty_bay/presentation/state_holder/read_profile_data_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/send_otp_to_email_controller.dart';
+import 'package:crafty_bay/presentation/state_holder/verify_otp_controller.dart';
 import 'package:get/get.dart';
 
 class controllerBinder extends Bindings {
@@ -9,5 +11,7 @@ class controllerBinder extends Bindings {
     Get.put(OtpTimeDecreaseController());
     Get.put(MainBottomNavController());
     Get.put(SendOtpToEmailController());
+    Get.put(VerifyOtpController());
+    Get.put(ReadProfileDataController());
   }
 }

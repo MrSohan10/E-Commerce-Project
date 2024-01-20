@@ -4,11 +4,11 @@ import 'app_colors.dart';
 
 class AppThemeData {
   static ThemeData lightTheme = ThemeData(
-    // colorScheme: ColorScheme.fromSeed(
-    //     seedColor: AppColors.primaryColor,
-    //     primary: AppColors.primaryColor,
-    //     background: Colors.white
-    // ),
+    colorScheme: ColorScheme.fromSeed(
+        seedColor: AppColors.primaryColor,
+        primary: AppColors.primaryColor,
+        background: Colors.white
+    ),
     progressIndicatorTheme:
         const ProgressIndicatorThemeData(color: AppColors.primaryColor),
     textTheme: TextTheme(

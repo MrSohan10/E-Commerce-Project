@@ -1,6 +1,7 @@
 import 'package:crafty_bay/presentation/state_holder/send_otp_to_email_controller.dart';
 import 'package:crafty_bay/presentation/ui/screen/auth/verify_otp_screen.dart';
 import 'package:crafty_bay/presentation/ui/widgets/app_logo.dart';
+import 'package:crafty_bay/presentation/ui/widgets/center_circular_progress_indicatior.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -59,35 +60,37 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                 const SizedBox(
                   height: 16,
                 ),
-                GetBuilder<SendOtpToEmailController>(
-                  builder: (controller) {
-                    return SizedBox(
-                      width: double.infinity,
-                      child: Visibility(
-                        visible: controller.inProgress == false,
-                        replacement: const Center(child: CircularProgressIndicator(),),
-                        child: ElevatedButton(
-                          onPressed: () async {
-                            if (_formKey.currentState!.validate()) {
-                            bool result = await  controller.sendOtpToEmail(_emailTEController.text.trim());
-                              if(result){
-                                Get.to(() => const VerifyOtpScreen());
-                              }else{
-                                Get.showSnackbar(GetSnackBar(
-                                  title: 'Send otp failed',
-                                  message: controller.errorMessage ?? "Something went wrong!",
-                                  backgroundColor: Colors.red,
-                                ));
-                              }
-
+                GetBuilder<SendOtpToEmailController>(builder: (controller) {
+                  return SizedBox(
+                    width: double.infinity,
+                    child: Visibility(
+                      visible: controller.inProgress == false,
+                      replacement: const CenterCircularProgressIndication(),
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            bool result = await controller
+                                .sendOtpToEmail(_emailTEController.text.trim());
+                            if (result) {
+                              Get.to(() => VerifyOtpScreen(
+                                    email: _emailTEController.text.trim(),
+                                  ));
+                            } else {
+                              Get.showSnackbar(GetSnackBar(
+                                duration: const Duration(seconds: 2),
+                                isDismissible: true,
+                                title: 'Send otp failed',
+                                message: controller.errorMessage,
+                                backgroundColor: Colors.red,
+                              ));
                             }
-                          },
-                          child: const Text('Next'),
-                        ),
+                          }
+                        },
+                        child: const Text('Next'),
                       ),
-                    );
-                  }
-                )
+                    ),
+                  );
+                })
               ],
             ),
           ),

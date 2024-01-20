@@ -14,8 +14,8 @@ class SendOtpToEmailController extends GetxController{
     update();
     final ResponseData response = await NetworkCaller().getRequest(Urls.sendEmailOtp(email));
     _inProgress = false;
-    update();
     if(response.isSuccess){
+      update();
       return true;
     }else{
       _errorMessage = response.errorMessage;

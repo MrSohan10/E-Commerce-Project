@@ -5,9 +5,14 @@ import 'package:http/http.dart';
 import '../models/response_data.dart';
 
 class NetworkCaller {
-  Future<ResponseData> getRequest(String url) async {
+  Future<ResponseData> getRequest(String url , {String? token}) async {
+    log(token.toString());
     log(url);
-    final Response response = await get(Uri.parse(url));
+    final Response response = await get(Uri.parse(url),headers: {
+      "token" : token.toString(),
+      'Content-type' : 'application/json'
+    });
+
     log(response.statusCode.toString());
     log(response.body.toString());
     if (response.statusCode == 200) {
