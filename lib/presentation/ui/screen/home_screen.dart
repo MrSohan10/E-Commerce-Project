@@ -1,3 +1,4 @@
+import 'package:crafty_bay/presentation/state_holder/auth_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/main_bottom_nav_controller.dart';
 import 'package:crafty_bay/presentation/ui/screen/product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
@@ -9,6 +10,7 @@ import '../widgets/home/banner_carousel.dart';
 import '../widgets/home/circle_icon_button.dart';
 import '../widgets/home/section_title.dart';
 import '../widgets/product_card.dart';
+import 'auth/verify_email_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -142,7 +144,10 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.white,
       actions: [
         CircleIconButton(
-          ontap: () {},
+          ontap: () {
+            Get.find<AuthController>().clearAuthData();
+            Get.offAll(()=> const VerifyEmailScreen());
+          },
           iconData: Icons.person_outline_outlined,
         ),
         const SizedBox(

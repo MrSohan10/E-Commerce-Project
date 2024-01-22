@@ -59,7 +59,6 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
               PinCodeTextField(
                 errorTextMargin: const EdgeInsets.only(left: 30, top: 50),
                 controller: _otpTEController,
-                cursorColor: AppColors.primaryColor,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 appContext: context,
                 length: 4,
@@ -112,7 +111,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                             Get.showSnackbar(GetSnackBar(
                               duration: const Duration(seconds: 2),
                               isDismissible: true,
-                              title: 'Verify otp fail',
+                              title: 'Verify otp failed',
                               message: controller.errorMessage,
                               backgroundColor: Colors.red,
                             ));

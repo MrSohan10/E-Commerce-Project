@@ -44,14 +44,13 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                 ),
                 TextFormField(
                   controller: _emailTEController,
-                  cursorColor: AppColors.primaryColor,
                   decoration: const InputDecoration(labelText: 'Email Address'),
                   validator: (value) {
                     if (value!.trim().isEmpty ?? true) {
                       return 'Enter e-mail address';
                     } else if (RegExp(
                             r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                        .hasMatch(value!)) {
+                        .hasMatch(value)) {
                       return null;
                     }
                     return 'invalid e-mail';
