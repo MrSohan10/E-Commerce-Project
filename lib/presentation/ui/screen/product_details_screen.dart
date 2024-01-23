@@ -1,6 +1,8 @@
+import 'package:crafty_bay/presentation/ui/screen/reviews_screen.dart';
 import 'package:crafty_bay/presentation/ui/widgets/product_details/product_image_carousel.dart';
 import 'package:crafty_bay/presentation/ui/widgets/product_details/size_selector.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:item_count_number_button/item_count_number_button.dart';
 
 import '../utility/app_colors.dart';
@@ -172,12 +174,18 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ],
         ),
         const SizedBox(width: 16),
-        const Text(
-          'Reviews',
-          style: TextStyle(
-            fontSize: 16,
-            color: AppColors.primaryColor,
-            fontWeight: FontWeight.w600,
+        InkWell(
+          onTap: (){
+            Get.to(()=> const ReviewsScreen());
+          },
+          borderRadius: BorderRadius.circular(4),
+          child: const Text(
+            'Reviews',
+            style: TextStyle(
+              fontSize: 16,
+              color: AppColors.primaryColor,
+              fontWeight: FontWeight.w600,
+            ),
           ),
         ),
         const SizedBox(width: 16),

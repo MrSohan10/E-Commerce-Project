@@ -1,11 +1,9 @@
 import 'package:crafty_bay/presentation/state_holder/send_otp_to_email_controller.dart';
 import 'package:crafty_bay/presentation/ui/screen/auth/verify_otp_screen.dart';
 import 'package:crafty_bay/presentation/ui/widgets/app_logo.dart';
-import 'package:crafty_bay/presentation/ui/widgets/center_circular_progress_indicatior.dart';
+import 'package:crafty_bay/presentation/ui/widgets/center_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../utility/app_colors.dart';
 
 class VerifyEmailScreen extends StatefulWidget {
   const VerifyEmailScreen({super.key});
