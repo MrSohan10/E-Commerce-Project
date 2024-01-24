@@ -7,4 +7,6 @@ class Urls {
       "$_baseUrl/VerifyLogin/$email/$otp";
   static String readProfile = "$_baseUrl/ReadProfile";
   static String createProfile = "$_baseUrl/CreateProfile";
+  static String homeBannerSlider = "$_baseUrl/ListProductSlider";
+  static String categoryList = "$_baseUrl/CategoryList";
 }

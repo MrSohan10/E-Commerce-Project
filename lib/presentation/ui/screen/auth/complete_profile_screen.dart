@@ -1,3 +1,4 @@
+import 'package:crafty_bay/data/models/create_profile_params.dart';
 import 'package:crafty_bay/presentation/state_holder/complete_profile_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/verify_otp_controller.dart';
 import 'package:crafty_bay/presentation/ui/screen/main_bottom_nav_screen.dart';
@@ -125,17 +126,20 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                       child: ElevatedButton(
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
+                            final createProfileParams = CreateProfileParams(
+                              firstName: _firstNameTEController.text.trim(),
+                              lastName: _lastNameTEController.text.trim(),
+                              mobile: _mobileTEController.text.trim(),
+                              city: _cityTEController.text.trim(),
+                              shippingAddress:
+                                  _shippingAddressTEController.text.trim(),
+                            );
                             final bool result =
                                 await controller.createProfileData(
-                              Get.find<VerifyOtpController>().token,
-                              _firstNameTEController.text.trim(),
-                              _lastNameTEController.text.trim(),
-                              _mobileTEController.text.trim(),
-                              _cityTEController.text.trim(),
-                              _shippingAddressTEController.text.trim(),
-                            );
+                                    Get.find<VerifyOtpController>().token,
+                                    createProfileParams);
                             if (result) {
-                              Get.offAll(()=> const MainBottomNavScreen());
+                              Get.offAll(() => const MainBottomNavScreen());
                             } else {
                               Get.showSnackbar(GetSnackBar(
                                 duration: const Duration(seconds: 2),

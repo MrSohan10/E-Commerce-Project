@@ -1,3 +1,5 @@
+import 'package:crafty_bay/presentation/state_holder/category_list_controller.dart';
+import 'package:crafty_bay/presentation/state_holder/home_banner_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/main_bottom_nav_controller.dart';
 import 'package:crafty_bay/presentation/ui/screen/carts_screen.dart';
 import 'package:crafty_bay/presentation/ui/screen/category_screen.dart';
@@ -23,6 +25,13 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
      CartScreen(),
      WishlistScreen(),
   ];
+
+   @override
+  void initState() {
+    super.initState();
+    Get.find<HomeBannerSliderController>().getHomeBannerList();
+    Get.find<CategoryListController>().getCategoryList();
+  }
 
   @override
   Widget build(BuildContext context) {

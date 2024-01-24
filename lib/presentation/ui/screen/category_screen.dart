@@ -1,4 +1,6 @@
+import 'package:crafty_bay/presentation/state_holder/category_list_controller.dart';
 import 'package:crafty_bay/presentation/ui/widgets/category_item.dart';
+import 'package:crafty_bay/presentation/ui/widgets/center_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -16,27 +18,37 @@ class _CategoryScreenState extends State<CategoryScreen> {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
-      onPopInvoked: (_){
+      onPopInvoked: (_) {
         Get.find<MainBottomNavController>().backToHome();
       },
       child: Scaffold(
         appBar: appBar,
         body: Padding(
-          padding: const EdgeInsets.only(left: 14,right: 14),
-          child: GridView.builder(
-            itemCount: 100,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 4,
-              crossAxisSpacing: 5,
-              mainAxisSpacing: 12,
-              childAspectRatio: 0.9,
-            ),
-            itemBuilder: (context, index) {
-              return const FittedBox(
-                child: CategoryItem(),
-              );
-            },
-          ),
+          padding: const EdgeInsets.only(left: 14, right: 14),
+          child: GetBuilder<CategoryListController>(builder: (controller) {
+            return Visibility(
+              visible: controller.inProgress == false,
+              replacement: const CenterCircularProgressIndication(),
+              child: GridView.builder(
+                itemCount:
+                    controller.categoryListModel.categoryDataList?.length ?? 0,
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  crossAxisSpacing: 5,
+                  mainAxisSpacing: 12,
+                  childAspectRatio: 0.9,
+                ),
+                itemBuilder: (context, index) {
+                  return FittedBox(
+                    child: CategoryItem(
+                      categoryData:
+                          controller.categoryListModel.categoryDataList![index],
+                    ),
+                  );
+                },
+              ),
+            );
+          }),
         ),
       ),
     );

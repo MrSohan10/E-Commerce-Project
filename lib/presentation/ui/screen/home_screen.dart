@@ -1,8 +1,11 @@
 import 'package:crafty_bay/presentation/state_holder/auth_controller.dart';
+import 'package:crafty_bay/presentation/state_holder/category_list_controller.dart';
+import 'package:crafty_bay/presentation/state_holder/home_banner_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/main_bottom_nav_controller.dart';
 import 'package:crafty_bay/presentation/ui/screen/product_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
 import 'package:crafty_bay/presentation/ui/utility/assets_path.dart';
+import 'package:crafty_bay/presentation/ui/widgets/center_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../widgets/category_item.dart';
@@ -26,13 +29,25 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: appBar,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(12),
           child: Column(
             children: [
               const SizedBox(height: 4),
               searchTextFormField,
               const SizedBox(height: 12),
-              const BannerCarousel(),
+              SizedBox(
+                  height: 202,
+                  child: GetBuilder<HomeBannerSliderController>(
+                      builder: (controller) {
+                    return Visibility(
+                      visible: controller.inProgress == false,
+                      replacement: const CenterCircularProgressIndication(),
+                      child: BannerCarousel(
+                        bannerData:
+                            controller.homeBannerListModel.bannerDataList ?? [],
+                      ),
+                    );
+                  })),
               const SizedBox(height: 8),
               SectionTitle(
                 title: 'All Categories',
@@ -75,19 +90,27 @@ class _HomeScreenState extends State<HomeScreen> {
   SizedBox get categoryList {
     return SizedBox(
       height: 100,
-      child: ListView.separated(
-        primary: false,
-        shrinkWrap: true,
-        scrollDirection: Axis.horizontal,
-        itemCount: 10,
-        itemBuilder: (context, index) {
-          return const CategoryItem();
-        },
-        separatorBuilder: (_, __) {
-          return const SizedBox(
-            width: 12,
+      child: GetBuilder<CategoryListController>(
+        builder: (controller) {
+          return Visibility(
+            visible: controller.inProgress == false,
+            replacement: const CenterCircularProgressIndication(),
+            child: ListView.separated(
+              primary: false,
+              shrinkWrap: true,
+              scrollDirection: Axis.horizontal,
+              itemCount: controller.categoryListModel.categoryDataList?.length ?? 0,
+              itemBuilder: (context, index) {
+                return  CategoryItem(categoryData: controller.categoryListModel.categoryDataList![index],);
+              },
+              separatorBuilder: (_, __) {
+                return const SizedBox(
+                  width: 12,
+                );
+              },
+            ),
           );
-        },
+        }
       ),
     );
   }
@@ -146,7 +169,7 @@ class _HomeScreenState extends State<HomeScreen> {
         CircleIconButton(
           ontap: () {
             Get.find<AuthController>().clearAuthData();
-            Get.offAll(()=> const VerifyEmailScreen());
+            Get.offAll(() => const VerifyEmailScreen());
           },
           iconData: Icons.person_outline_outlined,
         ),
