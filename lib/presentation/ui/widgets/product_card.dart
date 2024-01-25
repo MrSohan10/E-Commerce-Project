@@ -1,14 +1,17 @@
+import 'package:crafty_bay/data/models/product_model.dart';
 import 'package:crafty_bay/presentation/ui/screen/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../utility/app_colors.dart';
-import '../utility/assets_path.dart';
+
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
-    super.key,
+    super.key, required this.productModel,
   });
+
+  final ProductModel productModel;
 
   @override
   Widget build(BuildContext context) {
@@ -26,15 +29,16 @@ class ProductCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
-                borderRadius: const BorderRadius.only(
+                borderRadius:  const BorderRadius.only(
                   topLeft: Radius.circular(16),
                   topRight: Radius.circular(16),
                 ),
-                child: Image.asset(
-                  AssetsPath.shoeJpg,
+                child: Image.network(
+                  productModel.image ?? '',
                   width: 150,
                   height: 120,
-                  fit: BoxFit.cover,
+                  fit: BoxFit.scaleDown,
+
                 ),
               ),
               Padding(
@@ -43,7 +47,7 @@ class ProductCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'New year special shoe 30',
+                      productModel.title ?? '',
                       maxLines: 1,
                       style: TextStyle(
                         fontSize: 12,
@@ -54,9 +58,9 @@ class ProductCard extends StatelessWidget {
                     ),
                     Row(
                       children: [
-                        const Text(
-                          '\$120',
-                          style: TextStyle(
+                         Text(
+                          '\$${productModel.price}',
+                          style: const TextStyle(
                             fontSize: 12,
                             color: AppColors.primaryColor,
                             fontWeight: FontWeight.w600,
@@ -66,13 +70,13 @@ class ProductCard extends StatelessWidget {
                         Wrap(
                           crossAxisAlignment: WrapCrossAlignment.center,
                           children: [
-                            const Icon(
+                             const Icon(
                               Icons.star,
                               color: Colors.amber,
                               size: 14,
                             ),
                             Text(
-                              '4.4',
+                              productModel.star.toString(),
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.grey.shade700,
