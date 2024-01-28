@@ -6,9 +6,11 @@ class ProductImageCarousel extends StatefulWidget {
   const ProductImageCarousel({
     super.key,
     this.height,
+    required this.imgUrls,
   });
 
   final double? height;
+  final List<String> imgUrls;
 
   @override
   State<ProductImageCarousel> createState() => _ProductImageCarouselState();
@@ -30,26 +32,26 @@ class _ProductImageCarouselState extends State<ProductImageCarousel> {
               onPageChanged: (index, reason) {
                 _currentIndex.value = index;
               }),
-          items: [1, 2, 3, 4, 5].map((i) {
+          items: widget.imgUrls.map((url) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
-                    width: MediaQuery.of(context).size.width,
-                    // margin: const EdgeInsets.symmetric(horizontal: 0.0),
-                    decoration: BoxDecoration(
-                        // borderRadius: BorderRadius.circular(00),
-                        color: Colors.grey.shade400,),
-                    alignment: Alignment.center,
-                    child: Text(
-                      'text $i',
-                      style: const TextStyle(fontSize: 16.0),
-                    ));
+                  width: MediaQuery.of(context).size.width,
+                  // margin: const EdgeInsets.symmetric(horizontal: 0.0),
+                  decoration: BoxDecoration(
+                    // borderRadius: BorderRadius.circular(00),
+                    color: Colors.grey.shade400,
+                    image: DecorationImage(
+                      image: NetworkImage(url),
+                    ),
+                  ),
+                  alignment: Alignment.center,
+                );
               },
             );
           }).toList(),
         ),
         const SizedBox(height: 6),
-
         Positioned(
           bottom: 10,
           left: 0,
@@ -60,7 +62,7 @@ class _ProductImageCarouselState extends State<ProductImageCarousel> {
               return Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  for (int i = 0; i < 5; i++)
+                  for (int i = 0; i < widget.imgUrls.length; i++)
                     Container(
                       height: 12,
                       width: 12,

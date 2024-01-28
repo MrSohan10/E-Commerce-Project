@@ -14,7 +14,7 @@ class CraftyBay extends StatelessWidget {
     return GetMaterialApp(
       home: const SplashScreen(),
       theme: AppThemeData.lightTheme,
-      initialBinding: controllerBinder(),
+      initialBinding: ControllerBinder(),
     );
   }
 }

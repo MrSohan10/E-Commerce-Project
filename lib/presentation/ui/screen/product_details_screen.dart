@@ -1,4 +1,12 @@
+import 'dart:math';
+
+import 'package:crafty_bay/data/models/product_details_data.dart';
+import 'package:crafty_bay/presentation/state_holder/addToCartController.dart';
+import 'package:crafty_bay/presentation/state_holder/auth_controller.dart';
+import 'package:crafty_bay/presentation/state_holder/product_details_controller.dart';
+import 'package:crafty_bay/presentation/ui/screen/auth/verify_email_screen.dart';
 import 'package:crafty_bay/presentation/ui/screen/reviews_screen.dart';
+import 'package:crafty_bay/presentation/ui/widgets/center_circular_progress_indicator.dart';
 import 'package:crafty_bay/presentation/ui/widgets/product_details/product_image_carousel.dart';
 import 'package:crafty_bay/presentation/ui/widgets/product_details/size_selector.dart';
 import 'package:flutter/material.dart';
@@ -9,7 +17,9 @@ import '../utility/app_colors.dart';
 import '../widgets/product_details/color_selector.dart';
 
 class ProductDetailsScreen extends StatefulWidget {
-  const ProductDetailsScreen({super.key});
+  const ProductDetailsScreen({super.key, required this.productId});
+
+  final int productId;
 
   @override
   State<ProductDetailsScreen> createState() => _ProductDetailsScreenState();
@@ -17,23 +27,14 @@ class ProductDetailsScreen extends StatefulWidget {
 
 class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   ValueNotifier<int> noOfItem = ValueNotifier(1);
-  List<Color> colors = [
-    Colors.purple,
-    Colors.green,
-    Colors.amber,
-    Colors.cyanAccent,
-    Colors.grey,
-  ];
-  List<String> sizes = [
-    'S',
-    'M',
-    'L',
-    'XL',
-    'XXL',
-    'XXXL',
-  ];
-  Color _selectedColor = Colors.purple;
-  String _selectedSize = 'S';
+  String? _selectedColor;
+  String? _selectedSize;
+
+  @override
+  void initState() {
+    super.initState();
+    Get.find<ProductDetailsController>().getProductDetails(widget.productId);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,26 +42,39 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       appBar: AppBar(
         title: const Text('Product Details'),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  const ProductImageCarousel(),
-                  const SizedBox(height: 1),
-                  productDetailsBody,
-                ],
+      body: GetBuilder<ProductDetailsController>(builder: (controller) {
+        return Visibility(
+          visible: controller.inProgress == false,
+          replacement: const CenterCircularProgressIndication(),
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      ProductImageCarousel(
+                        imgUrls: [
+                          controller.productDetails.img1 ?? '',
+                          controller.productDetails.img2 ?? '',
+                          controller.productDetails.img3 ?? '',
+                          controller.productDetails.img4 ?? '',
+                        ],
+                      ),
+                      const SizedBox(height: 1),
+                      productDetailsBody(controller.productDetails),
+                    ],
+                  ),
+                ),
               ),
-            ),
+              priceAndAddToCartSection,
+            ],
           ),
-          priceAndAddToCartSection,
-        ],
-      ),
+        );
+      }),
     );
   }
 
-  Padding get productDetailsBody {
+  Padding productDetailsBody(ProductDetailsData productDetails) {
     return Padding(
       padding: const EdgeInsets.all(14.0),
       child: Column(
@@ -73,7 +87,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 children: [
                   Expanded(
                     child: Text(
-                      'Nike Sport Shoe 2023 Edition ED23R - Save 30%',
+                      productDetails.product?.title ?? '',
                       style: TextStyle(
                         color: Colors.grey.shade800,
                         fontWeight: FontWeight.w700,
@@ -98,7 +112,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 ],
               ),
               const SizedBox(height: 2),
-              reviewAndRatingRow,
+              reviewAndRatingRow(productDetails.product?.star ?? 0),
               const SizedBox(height: 4),
               Text(
                 'Color',
@@ -109,9 +123,13 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 ),
               ),
               ColorSelector(
-                colors: colors,
+                colors: productDetails.color
+                        ?.split(',')
+                        .map((e) => getColorFromString(e))
+                        .toList() ??
+                    [],
                 onChange: (selectedColor) {
-                  _selectedColor = selectedColor;
+                  _selectedColor = selectedColor.toString();
                 },
               ),
               const SizedBox(height: 4),
@@ -124,7 +142,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 ),
               ),
               SizeSelector(
-                  sizes: sizes,
+                  sizes: productDetails.size?.split(',') ?? [],
                   onChange: (selectedSize) {
                     _selectedSize = selectedSize;
                   }),
@@ -139,7 +157,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
               const SizedBox(height: 8),
               Text(
-                '''Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.''',
+                productDetails.des ?? '',
                 style: TextStyle(
                   color: Colors.grey.shade600,
                   fontSize: 14,
@@ -152,7 +170,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     );
   }
 
-  Row get reviewAndRatingRow {
+  Row reviewAndRatingRow(double rating) {
     return Row(
       children: [
         Wrap(
@@ -164,7 +182,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               size: 20,
             ),
             Text(
-              '4.4',
+              rating.toStringAsPrecision(2),
               style: TextStyle(
                 fontSize: 16,
                 color: Colors.grey.shade700,
@@ -175,8 +193,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         ),
         const SizedBox(width: 16),
         InkWell(
-          onTap: (){
-            Get.to(()=> const ReviewsScreen());
+          onTap: () {
+            Get.to(() => const ReviewsScreen());
           },
           borderRadius: BorderRadius.circular(4),
           child: const Text(
@@ -243,13 +261,65 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ),
           SizedBox(
             width: 120,
-            child: ElevatedButton(
-              onPressed: () {},
-              child: const Text('Add To Cart'),
-            ),
+            child: GetBuilder<AddToCartController>(builder: (controller) {
+              return ElevatedButton(
+                onPressed: () async {
+                  if (_selectedColor != null && _selectedSize != null) {
+                    if (Get.find<AuthController>().isTokenNotNull) {
+                      _selectedColor = (colorToHashColorCode(_selectedColor!));
+                      print(_selectedColor);
+                      print(_selectedSize);
+                      final response = await controller.addToCart(
+                          widget.productId, _selectedColor!, _selectedSize!);
+                      if (response) {
+                        Get.showSnackbar(const GetSnackBar(
+                          title: 'Success',
+                          message: 'This product has been added to cart',
+                          duration: Duration(seconds: 2),
+                          isDismissible: true,
+                        ));
+                      } else {
+                        Get.showSnackbar(GetSnackBar(
+                          title: 'Add to cart failed',
+                          message: controller.errorMessage,
+                          duration: const Duration(seconds: 2),
+                          isDismissible: true,
+                          backgroundColor: Colors.red,
+                        ));
+                      }
+                    } else {
+                      Get.to(() => const VerifyEmailScreen());
+                    }
+                  } else {
+                    Get.showSnackbar(const GetSnackBar(
+                      title: 'Add to cart failed',
+                      message: 'Please select color and size',
+                      duration: Duration(seconds: 2),
+                      isDismissible: true,
+                      backgroundColor: Colors.red,
+                    ));
+                  }
+                },
+                child: const Text('Add To Cart'),
+              );
+            }),
           ),
         ],
       ),
     );
+  }
+
+  Color getColorFromString(String colorCode) {
+    String code = colorCode.replaceAll('#', '');
+    String hexCode = 'FF$code';
+    return Color(int.parse('0x$hexCode'));
+  }
+
+  String colorToHashColorCode(String colorCode) {
+    return colorCode
+        .toString()
+        .replaceAll('0xff', '#')
+        .replaceAll('Color(', '')
+        .replaceAll(')', '');
   }
 }
