@@ -15,8 +15,7 @@ class AddToCartController extends GetxController {
 
   String get errorMessage => _errorMessage;
 
-  Future<bool> addToCart(
-      int productId, String color, String size) async {
+  Future<bool> addToCart(int productId, String color, String size) async {
     bool isSuccess = false;
     _inProgress = true;
     update();

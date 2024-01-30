@@ -1,7 +1,7 @@
 import 'dart:math';
 
 import 'package:crafty_bay/data/models/product_details_data.dart';
-import 'package:crafty_bay/presentation/state_holder/addToCartController.dart';
+import 'package:crafty_bay/presentation/state_holder/add_to_cart_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/auth_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/product_details_controller.dart';
 import 'package:crafty_bay/presentation/ui/screen/auth/verify_email_screen.dart';
@@ -33,7 +33,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
   @override
   void initState() {
     super.initState();
-    Get.find<ProductDetailsController>().getProductDetails(widget.productId);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<ProductDetailsController>().getProductDetails(widget.productId);
+    });
+
   }
 
   @override
@@ -43,32 +46,32 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         title: const Text('Product Details'),
       ),
       body: GetBuilder<ProductDetailsController>(builder: (controller) {
-        return Visibility(
-          visible: controller.inProgress == false,
-          replacement: const CenterCircularProgressIndication(),
-          child: Column(
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      ProductImageCarousel(
-                        imgUrls: [
-                          controller.productDetails.img1 ?? '',
-                          controller.productDetails.img2 ?? '',
-                          controller.productDetails.img3 ?? '',
-                          controller.productDetails.img4 ?? '',
-                        ],
-                      ),
-                      const SizedBox(height: 1),
-                      productDetailsBody(controller.productDetails),
-                    ],
-                  ),
+        if (controller.inProgress) {
+          return const CenterCircularProgressIndication();
+        }
+
+        return Column(
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    ProductImageCarousel(
+                      imgUrls: [
+                        controller.productDetails.img1 ?? '',
+                        controller.productDetails.img2 ?? '',
+                        controller.productDetails.img3 ?? '',
+                        controller.productDetails.img4 ?? '',
+                      ],
+                    ),
+                    const SizedBox(height: 1),
+                    productDetailsBody(controller.productDetails),
+                  ],
                 ),
               ),
-              priceAndAddToCartSection,
-            ],
-          ),
+            ),
+            priceAndAddToCartSection,
+          ],
         );
       }),
     );
@@ -249,9 +252,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   color: Colors.grey.shade700,
                 ),
               ),
-              const Text(
-                '\$1000',
-                style: TextStyle(
+              Text(
+                '\$${Get.find<ProductDetailsController>().productDetails.product?.price ?? 0}',
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
                   color: AppColors.primaryColor,
@@ -262,45 +265,47 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           SizedBox(
             width: 120,
             child: GetBuilder<AddToCartController>(builder: (controller) {
-              return ElevatedButton(
-                onPressed: () async {
-                  if (_selectedColor != null && _selectedSize != null) {
-                    if (Get.find<AuthController>().isTokenNotNull) {
-                      _selectedColor = (colorToHashColorCode(_selectedColor!));
-                      print(_selectedColor);
-                      print(_selectedSize);
-                      final response = await controller.addToCart(
-                          widget.productId, _selectedColor!, _selectedSize!);
-                      if (response) {
-                        Get.showSnackbar(const GetSnackBar(
-                          title: 'Success',
-                          message: 'This product has been added to cart',
-                          duration: Duration(seconds: 2),
-                          isDismissible: true,
-                        ));
+              return Visibility(
+                visible:  controller.inProgress == false,
+                replacement: const CenterCircularProgressIndication(),
+                child: ElevatedButton(
+                  onPressed: () async {
+                    if (_selectedColor != null && _selectedSize != null) {
+                      if (Get.find<AuthController>().isTokenNotNull) {
+                        _selectedColor = (colorToHashColorCode(_selectedColor!));
+                        final response = await controller.addToCart(
+                            widget.productId, _selectedColor!, _selectedSize!);
+                        if (response) {
+                          Get.showSnackbar(const GetSnackBar(
+                            title: 'Success',
+                            message: 'This product has been added to cart',
+                            duration: Duration(seconds: 2),
+                            isDismissible: true,
+                          ));
+                        } else {
+                          Get.showSnackbar(GetSnackBar(
+                            title: 'Add to cart failed',
+                            message: controller.errorMessage,
+                            duration: const Duration(seconds: 2),
+                            isDismissible: true,
+                            backgroundColor: Colors.red,
+                          ));
+                        }
                       } else {
-                        Get.showSnackbar(GetSnackBar(
-                          title: 'Add to cart failed',
-                          message: controller.errorMessage,
-                          duration: const Duration(seconds: 2),
-                          isDismissible: true,
-                          backgroundColor: Colors.red,
-                        ));
+                        Get.to(() => const VerifyEmailScreen());
                       }
                     } else {
-                      Get.to(() => const VerifyEmailScreen());
+                      Get.showSnackbar(const GetSnackBar(
+                        title: 'Add to cart failed',
+                        message: 'Please select color and size',
+                        duration: Duration(seconds: 2),
+                        isDismissible: true,
+                        backgroundColor: Colors.red,
+                      ));
                     }
-                  } else {
-                    Get.showSnackbar(const GetSnackBar(
-                      title: 'Add to cart failed',
-                      message: 'Please select color and size',
-                      duration: Duration(seconds: 2),
-                      isDismissible: true,
-                      backgroundColor: Colors.red,
-                    ));
-                  }
-                },
-                child: const Text('Add To Cart'),
+                  },
+                  child: const Text('Add To Cart'),
+                ),
               );
             }),
           ),

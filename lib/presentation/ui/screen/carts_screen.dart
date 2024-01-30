@@ -1,4 +1,6 @@
+import 'package:crafty_bay/presentation/state_holder/cart_list_controller.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
+import 'package:crafty_bay/presentation/ui/widgets/center_circular_progress_indicator.dart';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,6 +17,14 @@ class CartScreen extends StatefulWidget {
 
 class _CartScreenState extends State<CartScreen> {
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Get.find<CartListController>().getCartList();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     return PopScope(
       canPop: false,
@@ -23,22 +33,27 @@ class _CartScreenState extends State<CartScreen> {
       },
       child: Scaffold(
         appBar: appBar,
-        body: Column(
-          children: [
-             Expanded(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 4, right: 4),
-                child: ListView.builder(
-                  itemCount: 5,
-                  itemBuilder: (context, index) {
-                    return const CardProductItem();
-                  }
+        body: GetBuilder<CartListController>(builder: (controller) {
+          if (controller.inProgress) {
+            return const CenterCircularProgressIndication();
+          }
+          return Column(
+            children: [
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 4, right: 4),
+                  child: ListView.builder(
+                      itemCount:
+                          controller.cartListModel.cartItemList?.length ?? 0,
+                      itemBuilder: (context, index) {
+                        return const CardProductItem();
+                      }),
                 ),
               ),
-            ),
-            totalPriceCheckoutSection
-          ],
-        ),
+              totalPriceCheckoutSection
+            ],
+          );
+        }),
       ),
     );
   }
