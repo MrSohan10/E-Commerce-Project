@@ -1,20 +1,32 @@
+import 'package:crafty_bay/data/models/cart_item_data.dart';
+import 'package:crafty_bay/presentation/state_holder/cart_list_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:item_count_number_button/item_count_number_button.dart';
 
 import '../../utility/app_colors.dart';
-import '../../utility/assets_path.dart';
 
 class CardProductItem extends StatefulWidget {
   const CardProductItem({
-    super.key,
+    super.key, required this.cartItemData,
   });
+
+  final CartItemData cartItemData;
 
   @override
   State<CardProductItem> createState() => _CardProductItemState();
 }
 
 class _CardProductItemState extends State<CardProductItem> {
+
   ValueNotifier<int> noOfItem = ValueNotifier(1);
+
+
+  @override
+  void initState() {
+    super.initState();
+    noOfItem.value = int.parse(widget.cartItemData.qty!);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +41,8 @@ class _CardProductItemState extends State<CardProductItem> {
               topLeft: Radius.circular(10),
               bottomLeft: Radius.circular(10),
             ),
-            child: Image.asset(
-              AssetsPath.shoeJpg,
+            child: Image.network(
+              widget.cartItemData.product?.image ?? '',
               width: 120,
               height: 104,
               fit: BoxFit.cover,
@@ -48,7 +60,7 @@ class _CardProductItemState extends State<CardProductItem> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "New Year Special Shoe llsdfdf",
+                            widget.cartItemData.product?.title ?? '',
                             maxLines: 1,
                             style: TextStyle(
                                 fontSize: 18,
@@ -56,11 +68,11 @@ class _CardProductItemState extends State<CardProductItem> {
                                 fontWeight: FontWeight.w600,
                                 overflow: TextOverflow.ellipsis),
                           ),
-                          const Row(
+                          Row(
                             children: [
-                              Text('Colors: Red'),
-                              SizedBox(width: 8),
-                              Text('Size: XL'),
+                              Text('Colors: ${widget.cartItemData.color}'),
+                              const SizedBox(width: 8),
+                              Text('Size: ${widget.cartItemData.size}'),
                             ],
                           )
                         ],
@@ -79,9 +91,9 @@ class _CardProductItemState extends State<CardProductItem> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    const Text(
-                      '\$100',
-                      style: TextStyle(
+                    Text(
+                      '৳${widget.cartItemData.product?.price ?? 0}',
+                      style: const TextStyle(
                           color: AppColors.primaryColor,
                           fontSize: 18,
                           fontWeight: FontWeight.w700),
@@ -97,6 +109,8 @@ class _CardProductItemState extends State<CardProductItem> {
                             color: AppColors.primaryColor,
                             onChanged: (v) {
                               noOfItem.value = v.toInt();
+                              Get.find<CartListController>().updateQuantity(
+                                  widget.cartItemData.id!, noOfItem.value);
                             },
                           );
                         })

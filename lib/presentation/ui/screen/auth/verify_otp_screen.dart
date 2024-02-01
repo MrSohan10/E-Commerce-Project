@@ -61,7 +61,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                 controller: _otpTEController,
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 appContext: context,
-                length: 4,
+                length: 6,
                 obscureText: true,
                 obscuringCharacter: "*",
                 keyboardType: TextInputType.number,
@@ -81,8 +81,8 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                   if (value!.trim().isEmpty ?? true) {
                     return "Enter Value";
                   }
-                  if (value!.length < 4) {
-                    return "Enter 4 digit otp";
+                  if (value!.length < 6) {
+                    return "Enter 6 digit otp";
                   }
                   return null;
                 },

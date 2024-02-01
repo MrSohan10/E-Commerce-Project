@@ -31,7 +31,16 @@ class NetworkCaller {
           errorMessage: decodeResponse['data'] ?? 'Something went wrong!',
         );
       }
-    } else {
+    }else if(response.statusCode == 401){
+      AuthController.clearAuthData();
+      AuthController.goToLogin();
+      return ResponseData(
+        isSuccess: false,
+        statusCode: response.statusCode,
+        responseData: '',
+      );
+    }
+    else {
       return ResponseData(
         isSuccess: false,
         statusCode: response.statusCode,
@@ -59,7 +68,16 @@ class NetworkCaller {
           statusCode: response.statusCode,
           responseData: decodeResponse,
         );
-      } else {
+      } else if(response.statusCode == 401){
+        AuthController.clearAuthData();
+        AuthController.goToLogin();
+        return ResponseData(
+          isSuccess: false,
+          statusCode: response.statusCode,
+          responseData: '',
+        );
+      }
+      else {
         return ResponseData(
             isSuccess: false,
             statusCode: response.statusCode,

@@ -1,5 +1,4 @@
 
-
 import 'cart_item_data.dart';
 
 class CartListModel {

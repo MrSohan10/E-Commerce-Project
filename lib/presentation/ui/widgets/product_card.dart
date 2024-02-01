@@ -41,7 +41,7 @@ class ProductCard extends StatelessWidget {
                   productModel.image ?? '',
                   width: 150,
                   height: 120,
-                  fit: BoxFit.scaleDown,
+                  fit: BoxFit.cover,
                 ),
               ),
               Padding(

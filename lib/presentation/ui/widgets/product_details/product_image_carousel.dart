@@ -41,11 +41,9 @@ class _ProductImageCarouselState extends State<ProductImageCarousel> {
                   decoration: BoxDecoration(
                     // borderRadius: BorderRadius.circular(00),
                     color: Colors.grey.shade400,
-                    image: DecorationImage(
-                      image: NetworkImage(url),
-                    ),
                   ),
                   alignment: Alignment.center,
+                  child: Image.network(url,width: 400,fit: BoxFit.cover,),
                 );
               },
             );

@@ -8,14 +8,14 @@ import 'package:get/get.dart';
 import '../../state_holder/main_bottom_nav_controller.dart';
 import '../widgets/carts/card_product_item.dart';
 
-class CartScreen extends StatefulWidget {
-  const CartScreen({super.key});
+class CartListScreen extends StatefulWidget {
+  const CartListScreen({super.key});
 
   @override
-  State<CartScreen> createState() => _CartScreenState();
+  State<CartListScreen> createState() => _CartListScreenState();
 }
 
-class _CartScreenState extends State<CartScreen> {
+class _CartListScreenState extends State<CartListScreen> {
   @override
   void initState() {
     super.initState();
@@ -46,11 +46,14 @@ class _CartScreenState extends State<CartScreen> {
                       itemCount:
                           controller.cartListModel.cartItemList?.length ?? 0,
                       itemBuilder: (context, index) {
-                        return const CardProductItem();
+                        return CardProductItem(
+                          cartItemData:
+                              controller.cartListModel.cartItemList![index],
+                        );
                       }),
                 ),
               ),
-              totalPriceCheckoutSection
+              totalPriceCheckoutSection(controller.totalPrice)
             ],
           );
         }),
@@ -58,7 +61,7 @@ class _CartScreenState extends State<CartScreen> {
     );
   }
 
-  Container get totalPriceCheckoutSection {
+  Container totalPriceCheckoutSection(double totalPrice) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -82,14 +85,14 @@ class _CartScreenState extends State<CartScreen> {
                   color: Colors.grey.shade700,
                 ),
               ),
-              const Text(
-                '\$1079357',
-                style: TextStyle(
+              Text(
+                '৳$totalPrice',
+                style: const TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.w600,
                   color: AppColors.primaryColor,
                 ),
-              )
+              ),
             ],
           ),
           SizedBox(

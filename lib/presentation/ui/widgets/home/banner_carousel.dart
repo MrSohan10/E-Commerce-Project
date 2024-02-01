@@ -48,7 +48,7 @@ class _BannerCarouselState extends State<BannerCarousel> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(child: Image.network(banner.image ?? '')),
+                      Expanded(child: Image.network(banner.image ?? '',)),
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(

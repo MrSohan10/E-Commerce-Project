@@ -2,7 +2,7 @@ import 'package:crafty_bay/presentation/state_holder/category_list_controller.da
 import 'package:crafty_bay/presentation/state_holder/home_banner_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/main_bottom_nav_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/popular_product_list_controller.dart';
-import 'package:crafty_bay/presentation/ui/screen/carts_screen.dart';
+import 'package:crafty_bay/presentation/ui/screen/carts_list_screen.dart';
 import 'package:crafty_bay/presentation/ui/screen/category_screen.dart';
 import 'package:crafty_bay/presentation/ui/screen/home_screen.dart';
 import 'package:crafty_bay/presentation/ui/screen/wishlist_screen.dart';
@@ -25,7 +25,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
   final List<Widget> _screen = const [
     HomeScreen(),
     CategoryScreen(),
-    CartScreen(),
+    CartListScreen(),
     WishlistScreen(),
   ];
 

@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:crafty_bay/data/models/cart_item_data.dart';
 import 'package:crafty_bay/data/models/cart_list_model.dart';
 import 'package:crafty_bay/presentation/state_holder/auth_controller.dart';
 import 'package:get/get.dart';
@@ -20,6 +21,9 @@ class CartListController extends GetxController {
 
   CartListModel get cartListModel => _cartListModel;
 
+ // final RxDouble _totalPrice = 0.0.obs;
+ // RxDouble get totalPrice => _totalPrice;
+
   Future<bool> getCartList() async {
     bool isSuccess = false;
     _inProgress = true;
@@ -35,5 +39,21 @@ class CartListController extends GetxController {
     }
     update();
     return isSuccess;
+  }
+
+  void updateQuantity(int id, int quantity) {
+    _cartListModel.cartItemList?.firstWhere((element) => element.id == id).qty =
+        quantity.toString();
+    update();
+    // _totalPrice.value = calculateTotalPrice;
+  }
+
+  double get totalPrice {
+    double total = 0;
+    for (CartItemData item in _cartListModel.cartItemList ?? []) {
+      total += (double.tryParse(item.product?.price ?? '0') ?? 0) *
+          int.parse(item.qty!);
+    }
+    return total;
   }
 }
