@@ -1,5 +1,6 @@
 import 'package:crafty_bay/data/models/cart_item_data.dart';
 import 'package:crafty_bay/presentation/state_holder/cart_list_controller.dart';
+import 'package:crafty_bay/presentation/state_holder/delete_cart_list_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:item_count_number_button/item_count_number_button.dart';
@@ -8,7 +9,8 @@ import '../../utility/app_colors.dart';
 
 class CardProductItem extends StatefulWidget {
   const CardProductItem({
-    super.key, required this.cartItemData,
+    super.key,
+    required this.cartItemData,
   });
 
   final CartItemData cartItemData;
@@ -18,9 +20,7 @@ class CardProductItem extends StatefulWidget {
 }
 
 class _CardProductItemState extends State<CardProductItem> {
-
   ValueNotifier<int> noOfItem = ValueNotifier(1);
-
 
   @override
   void initState() {
@@ -79,7 +79,13 @@ class _CardProductItemState extends State<CardProductItem> {
                       ),
                     ),
                     IconButton(
-                      onPressed: () {},
+                      onPressed: () async {
+                        showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return deleteAlertDialog;
+                            });
+                      },
                       icon: Icon(
                         Icons.delete_forever,
                         color: Colors.grey.shade600,
@@ -121,6 +127,32 @@ class _CardProductItemState extends State<CardProductItem> {
           ),
         ],
       ),
+    );
+  }
+
+  AlertDialog get deleteAlertDialog {
+    return AlertDialog(
+      title: const Text('Delete'),
+      content: const Text('Do you want to delete this item?'),
+      actions: [
+        TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: const Text('No')),
+        TextButton(
+            onPressed: () async {
+              Get.find<DeleteCartListController>()
+                  .deleteCartListItem(widget.cartItemData.productId!);
+              Get.find<CartListController>()
+                  .cartListModel
+                  .cartItemList!
+                  .clear();
+              Get.find<CartListController>().getCartList();
+              Get.back();
+            },
+            child: const Text('Yes')),
+      ],
     );
   }
 }

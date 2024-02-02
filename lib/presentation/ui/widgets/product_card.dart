@@ -1,17 +1,21 @@
 import 'package:crafty_bay/data/models/product_model.dart';
 import 'package:crafty_bay/presentation/state_holder/add_to_wishlist_controller.dart';
+import 'package:crafty_bay/presentation/state_holder/wish_list_controller.dart';
 import 'package:crafty_bay/presentation/ui/screen/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../state_holder/remove_wish_list_controller.dart';
 import '../utility/app_colors.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
     super.key,
     required this.productModel,
+    this.addToWishList = true,
   });
 
+  final bool addToWishList;
   final ProductModel productModel;
 
   @override
@@ -91,25 +95,35 @@ class ProductCard extends StatelessWidget {
                         const SizedBox(width: 10),
                         InkWell(
                           onTap: () async {
-                            bool response =
-                                await Get.find<AddToWishListController>()
-                                    .addToWishList(productModel.id!);
-                            if (response) {
-                              Get.showSnackbar(const GetSnackBar(
-                                title: 'Success',
-                                message: 'This product has been added to cart',
-                                duration: Duration(seconds: 2),
-                                isDismissible: true,
-                              ));
-                            } else {
-                              Get.showSnackbar(GetSnackBar(
-                                title: 'Add to wishList failed',
-                                message: Get.find<AddToWishListController>()
-                                    .errorMessage,
-                                duration: const Duration(seconds: 2),
-                                isDismissible: true,
-                                backgroundColor: Colors.red,
-                              ));
+                            if (addToWishList) {
+                              bool response =
+                                  await Get.find<AddToWishListController>()
+                                      .addToWishList(productModel.id!);
+                              if (response) {
+                                Get.showSnackbar(const GetSnackBar(
+                                  title: 'Success',
+                                  message:
+                                      'This product has been added to cart',
+                                  duration: Duration(seconds: 2),
+                                  isDismissible: true,
+                                ));
+                              } else {
+                                Get.showSnackbar(GetSnackBar(
+                                  title: 'Add to wishList failed',
+                                  message: Get.find<AddToWishListController>()
+                                      .errorMessage,
+                                  duration: const Duration(seconds: 2),
+                                  isDismissible: true,
+                                  backgroundColor: Colors.red,
+                                ));
+                              }
+                            }
+                            if(addToWishList == false){
+                              showDialog(
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return removeAlertDialog;
+                                  });
                             }
                           },
                           borderRadius: BorderRadius.circular(4),
@@ -118,10 +132,12 @@ class ProductCard extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
                             ),
-                            child: const Padding(
-                              padding: EdgeInsets.all(2.0),
+                            child:  Padding(
+                              padding: const EdgeInsets.all(2.0),
                               child: Icon(
-                                Icons.favorite_border_outlined,
+                                addToWishList == false
+                                    ? Icons.delete_forever
+                                    : Icons.favorite_border_outlined,
                                 size: 16,
                                 color: Colors.white,
                               ),
@@ -137,6 +153,31 @@ class ProductCard extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+  AlertDialog get removeAlertDialog {
+    return AlertDialog(
+      title: const Text('Remove'),
+      content: const Text('Do you want to remove this item?'),
+      actions: [
+        TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: const Text('No')),
+        TextButton(
+            onPressed: () async {
+              Get.find<RemoveWishListController>()
+                  .removeWishListItem(productModel.id!);
+              Get.find<WishListController>()
+                  .wishListModel
+                  .wishItemList!
+                  .clear();
+              Get.find<WishListController>().getWishList();
+              Get.back();
+            },
+            child: const Text('Yes')),
+      ],
     );
   }
 }

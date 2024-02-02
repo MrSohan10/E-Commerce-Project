@@ -37,24 +37,28 @@ class _CartListScreenState extends State<CartListScreen> {
           if (controller.inProgress) {
             return const CenterCircularProgressIndication();
           }
-          return Column(
-            children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 4, right: 4),
-                  child: ListView.builder(
-                      itemCount:
-                          controller.cartListModel.cartItemList?.length ?? 0,
-                      itemBuilder: (context, index) {
-                        return CardProductItem(
-                          cartItemData:
-                              controller.cartListModel.cartItemList![index],
-                        );
-                      }),
+          return Visibility(
+            visible: controller.cartListModel.cartItemList?.isNotEmpty ?? false,
+            replacement: const Center(child: Text('Empty Cart List'),),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 4, right: 4,top: 4),
+                    child: ListView.builder(
+                        itemCount:
+                            controller.cartListModel.cartItemList?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          return CardProductItem(
+                            cartItemData:
+                                controller.cartListModel.cartItemList![index],
+                          );
+                        }),
+                  ),
                 ),
-              ),
-              totalPriceCheckoutSection(controller.totalPrice)
-            ],
+                totalPriceCheckoutSection(controller.totalPrice)
+              ],
+            ),
           );
         }),
       ),
