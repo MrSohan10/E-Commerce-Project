@@ -41,6 +41,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
                   height: 24,
                 ),
                 TextFormField(
+                  keyboardType: TextInputType.emailAddress,
                   controller: _emailTEController,
                   decoration: const InputDecoration(labelText: 'Email Address'),
                   validator: (value) {

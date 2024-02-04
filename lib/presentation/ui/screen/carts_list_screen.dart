@@ -39,12 +39,14 @@ class _CartListScreenState extends State<CartListScreen> {
           }
           return Visibility(
             visible: controller.cartListModel.cartItemList?.isNotEmpty ?? false,
-            replacement: const Center(child: Text('Empty Cart List'),),
+            replacement: const Center(
+              child: Text('Empty Cart List'),
+            ),
             child: Column(
               children: [
                 Expanded(
                   child: Padding(
-                    padding: const EdgeInsets.only(left: 4, right: 4,top: 4),
+                    padding: const EdgeInsets.only(left: 4, right: 4, top: 4),
                     child: ListView.builder(
                         itemCount:
                             controller.cartListModel.cartItemList?.length ?? 0,
@@ -65,7 +67,7 @@ class _CartListScreenState extends State<CartListScreen> {
     );
   }
 
-  Container totalPriceCheckoutSection(double totalPrice) {
+  Container totalPriceCheckoutSection(RxDouble totalPrice) {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
@@ -89,14 +91,16 @@ class _CartListScreenState extends State<CartListScreen> {
                   color: Colors.grey.shade700,
                 ),
               ),
-              Text(
-                '৳$totalPrice',
-                style: const TextStyle(
-                  fontSize: 20,
-                  fontWeight: FontWeight.w600,
-                  color: AppColors.primaryColor,
-                ),
-              ),
+              Obx(() {
+                return Text(
+                  '৳$totalPrice',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                    color: AppColors.primaryColor,
+                  ),
+                );
+              }),
             ],
           ),
           SizedBox(

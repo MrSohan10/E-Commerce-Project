@@ -21,24 +21,24 @@ class Profile {
 
   Profile(
       {this.userId,
-        this.cusName,
-        this.cusAdd,
-        this.cusCity,
-        this.cusState,
-        this.cusPostcode,
-        this.cusCountry,
-        this.cusPhone,
-        this.cusFax,
-        this.shipName,
-        this.shipAdd,
-        this.shipCity,
-        this.shipState,
-        this.shipPostcode,
-        this.shipCountry,
-        this.shipPhone,
-        this.updatedAt,
-        this.createdAt,
-        this.id});
+      this.cusName,
+      this.cusAdd,
+      this.cusCity,
+      this.cusState,
+      this.cusPostcode,
+      this.cusCountry,
+      this.cusPhone,
+      this.cusFax,
+      this.shipName,
+      this.shipAdd,
+      this.shipCity,
+      this.shipState,
+      this.shipPostcode,
+      this.shipCountry,
+      this.shipPhone,
+      this.updatedAt,
+      this.createdAt,
+      this.id});
 
   Profile.fromJson(Map<String, dynamic> json) {
     userId = json['user_id'];

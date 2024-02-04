@@ -24,8 +24,7 @@ class CategoryListController extends GetxController {
     final response = await NetworkCaller().getRequest(Urls.categoryList);
     _inProgress = false;
     if (response.isSuccess) {
-      _categoryListModel =
-          CategoryListModel.fromJson(response.responseData);
+      _categoryListModel = CategoryListModel.fromJson(response.responseData);
       isSuccess = true;
     } else {
       _errorMessage = response.errorMessage;

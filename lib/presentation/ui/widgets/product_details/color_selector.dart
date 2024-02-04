@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
 class ColorSelector extends StatefulWidget {
-  const ColorSelector({super.key, required this.colors, required this.onChange});
+  const ColorSelector(
+      {super.key, required this.colors, required this.onChange});
 
   final List<Color> colors;
-  final Function(Color)  onChange;
+  final Function(Color) onChange;
 
   @override
   State<ColorSelector> createState() => _ColorSelectorState();
@@ -12,7 +13,6 @@ class ColorSelector extends StatefulWidget {
 
 class _ColorSelectorState extends State<ColorSelector> {
   late Color _selectedColor;
-
 
   @override
   void initState() {

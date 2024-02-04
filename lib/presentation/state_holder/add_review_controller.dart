@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import '../../data/services/network_caller.dart';
 import '../../data/utility/urls.dart';
 
-class DeleteCartListController extends GetxController {
+class AddReviewController extends GetxController {
   bool _inProgress = false;
 
   bool get inProgress => _inProgress;
@@ -12,15 +12,19 @@ class DeleteCartListController extends GetxController {
 
   String get errorMessage => _errorMessage;
 
-  Future<bool> deleteCartListItem(
-    int productId,
-  ) async {
+  Future<bool> addReview(int productId, int rating, String description) async {
     bool isSuccess = false;
     _inProgress = true;
     update();
 
-    final response = await NetworkCaller().getRequest(
-      Urls.deleteCartList(productId),
+    Map<String, dynamic> inputParams = {
+      "description": description,
+      "product_id": productId,
+      "rating": rating
+    };
+    final response = await NetworkCaller().postRequest(
+      Urls.addReview,
+      body: inputParams,
     );
     _inProgress = false;
     if (response.isSuccess) {

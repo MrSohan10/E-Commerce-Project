@@ -9,12 +9,12 @@ class BannerData {
 
   BannerData(
       {this.id,
-        this.title,
-        this.shortDes,
-        this.image,
-        this.productId,
-        this.createdAt,
-        this.updatedAt});
+      this.title,
+      this.shortDes,
+      this.image,
+      this.productId,
+      this.createdAt,
+      this.updatedAt});
 
   BannerData.fromJson(Map<String, dynamic> json) {
     id = json['id'];

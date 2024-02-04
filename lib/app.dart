@@ -1,4 +1,3 @@
-import 'package:crafty_bay/presentation/state_holder/otp_time_decrease_controller.dart';
 import 'package:crafty_bay/presentation/ui/screen/splash_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_theme_data.dart';
 import 'package:get/get.dart';
@@ -18,4 +17,3 @@ class CraftyBay extends StatelessWidget {
     );
   }
 }
-

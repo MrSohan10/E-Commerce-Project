@@ -48,7 +48,10 @@ class _BannerCarouselState extends State<BannerCarousel> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Expanded(child: Image.network(banner.image ?? '',)),
+                      Expanded(
+                          child: Image.network(
+                        banner.image ?? '',
+                      )),
                       Padding(
                         padding: const EdgeInsets.all(16.0),
                         child: Column(
@@ -67,10 +70,9 @@ class _BannerCarouselState extends State<BannerCarousel> {
                               width: 100,
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  padding: EdgeInsets.zero,
-                                  backgroundColor: Colors.white,
-                                  foregroundColor: AppColors.primaryColor
-                                ),
+                                    padding: EdgeInsets.zero,
+                                    backgroundColor: Colors.white,
+                                    foregroundColor: AppColors.primaryColor),
                                 onPressed: () {},
                                 child: const Text('Buy Now'),
                               ),

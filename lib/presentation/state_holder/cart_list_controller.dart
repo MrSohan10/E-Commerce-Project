@@ -21,8 +21,8 @@ class CartListController extends GetxController {
 
   CartListModel get cartListModel => _cartListModel;
 
- // final RxDouble _totalPrice = 0.0.obs;
- // RxDouble get totalPrice => _totalPrice;
+  final RxDouble _totalPrice = 0.0.obs;
+  RxDouble get totalPrice => _totalPrice;
 
   Future<bool> getCartList() async {
     bool isSuccess = false;
@@ -33,6 +33,7 @@ class CartListController extends GetxController {
     _inProgress = false;
     if (response.isSuccess) {
       _cartListModel = CartListModel.fromJson(response.responseData);
+      _totalPrice.value = _calculateTotalPrice;
       isSuccess = true;
     } else {
       _errorMessage = response.errorMessage;
@@ -44,11 +45,11 @@ class CartListController extends GetxController {
   void updateQuantity(int id, int quantity) {
     _cartListModel.cartItemList?.firstWhere((element) => element.id == id).qty =
         quantity.toString();
-    update();
-    // _totalPrice.value = calculateTotalPrice;
+
+    _totalPrice.value = _calculateTotalPrice;
   }
 
-  double get totalPrice {
+  double get _calculateTotalPrice {
     double total = 0;
     for (CartItemData item in _cartListModel.cartItemList ?? []) {
       total += (double.tryParse(item.product?.price ?? '0') ?? 0) *

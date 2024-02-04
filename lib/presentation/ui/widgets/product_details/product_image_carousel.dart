@@ -43,7 +43,11 @@ class _ProductImageCarouselState extends State<ProductImageCarousel> {
                     color: Colors.grey.shade400,
                   ),
                   alignment: Alignment.center,
-                  child: Image.network(url,width: 400,fit: BoxFit.cover,),
+                  child: Image.network(
+                    url,
+                    width: 400,
+                    fit: BoxFit.cover,
+                  ),
                 );
               },
             );

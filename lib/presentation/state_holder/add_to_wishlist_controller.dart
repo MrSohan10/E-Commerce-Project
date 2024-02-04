@@ -1,6 +1,3 @@
-import 'package:crafty_bay/data/models/category_list_model.dart';
-import 'package:crafty_bay/data/models/product_details_data.dart';
-import 'package:crafty_bay/data/models/product_details_model.dart';
 import 'package:get/get.dart';
 
 import '../../data/services/network_caller.dart';

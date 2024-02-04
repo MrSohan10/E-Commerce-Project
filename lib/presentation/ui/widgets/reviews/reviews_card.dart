@@ -1,9 +1,13 @@
+import 'package:crafty_bay/data/models/review_data.dart';
 import 'package:flutter/material.dart';
 
 class ReviewsCard extends StatefulWidget {
   const ReviewsCard({
     super.key,
+    required this.reviewData,
   });
+
+  final ReviewData reviewData;
 
   @override
   State<ReviewsCard> createState() => _ReviewsCardState();
@@ -16,9 +20,9 @@ class _ReviewsCardState extends State<ReviewsCard> {
       color: Colors.white,
       elevation: 0.5,
       child: Padding(
-        padding: const EdgeInsets.only(
-            top: 8, left: 16, right: 16, bottom: 12),
+        padding: const EdgeInsets.only(top: 8, left: 16, right: 16, bottom: 12),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Row(
               children: [
@@ -31,7 +35,7 @@ class _ReviewsCardState extends State<ReviewsCard> {
                   width: 8,
                 ),
                 Text(
-                  'Rabbil Hasan',
+                  '${widget.reviewData.profile!.cusName}',
                   maxLines: 1,
                   style: TextStyle(
                       fontSize: 18,
@@ -45,7 +49,7 @@ class _ReviewsCardState extends State<ReviewsCard> {
               height: 5,
             ),
             Text(
-              '''Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy ts of Lorem Ipsum.''',
+              '${widget.reviewData.description}',
               style: TextStyle(
                 color: Colors.grey.shade600,
                 fontSize: 14,

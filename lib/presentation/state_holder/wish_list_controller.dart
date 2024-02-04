@@ -38,5 +38,4 @@ class WishListController extends GetxController {
     update();
     return isSuccess;
   }
-
 }

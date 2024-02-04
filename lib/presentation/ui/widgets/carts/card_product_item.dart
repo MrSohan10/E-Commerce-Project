@@ -20,12 +20,12 @@ class CardProductItem extends StatefulWidget {
 }
 
 class _CardProductItemState extends State<CardProductItem> {
-  ValueNotifier<int> noOfItem = ValueNotifier(1);
+  late ValueNotifier<int> noOfItem =
+      ValueNotifier(int.parse(widget.cartItemData.qty!));
 
   @override
   void initState() {
     super.initState();
-    noOfItem.value = int.parse(widget.cartItemData.qty!);
   }
 
   @override

@@ -5,7 +5,7 @@ class SizeSelector extends StatefulWidget {
   const SizeSelector({super.key, required this.sizes, required this.onChange});
 
   final List<String> sizes;
-  final Function(String)  onChange;
+  final Function(String) onChange;
 
   @override
   State<SizeSelector> createState() => _SizeSelectorState();
@@ -13,7 +13,6 @@ class SizeSelector extends StatefulWidget {
 
 class _SizeSelectorState extends State<SizeSelector> {
   late String _selectedSize;
-
 
   @override
   void initState() {
@@ -29,37 +28,37 @@ class _SizeSelectorState extends State<SizeSelector> {
       children: widget.sizes
           .map(
             (s) => InkWell(
-          onTap: () {
-            _selectedSize = s;
-            widget.onChange(s);
-            if (mounted) {
-              setState(() {});
-            }
-          },
-          borderRadius: BorderRadius.circular(16),
-          child: Padding(
-            padding: const EdgeInsets.all(4.0),
-            child: Container(
-
-              padding: const EdgeInsets.symmetric(
-                horizontal: 12,
-                vertical: 8,
+              onTap: () {
+                _selectedSize = s;
+                widget.onChange(s);
+                if (mounted) {
+                  setState(() {});
+                }
+              },
+              borderRadius: BorderRadius.circular(16),
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 12,
+                    vertical: 8,
+                  ),
+                  decoration: BoxDecoration(
+                      color: _selectedSize == s ? AppColors.primaryColor : null,
+                      borderRadius: BorderRadius.circular(30),
+                      border: Border.all(
+                        color: Colors.grey,
+                      )),
+                  child: Text(
+                    s,
+                    style: TextStyle(
+                      color: _selectedSize == s ? Colors.white : Colors.black87,
+                    ),
+                  ),
+                ),
               ),
-            decoration: BoxDecoration(
-                color: _selectedSize == s ? AppColors.primaryColor : null,
-              borderRadius: BorderRadius.circular(30),
-              border: Border.all(
-                color: Colors.grey,
-              )
             ),
-              child: Text(s,style: TextStyle(
-                color: _selectedSize == s ? Colors.white : Colors.black87,
-              ),),
-            ),
-
-          ),
-        ),
-      )
+          )
           .toList(),
     );
   }

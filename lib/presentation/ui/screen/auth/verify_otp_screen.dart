@@ -100,14 +100,12 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
                           final bool response = await controller.verifyOtp(
                               widget.email, _otpTEController.text);
                           if (response) {
-                            if(controller.shouldNavigateCompleteProfile){
+                            if (controller.shouldNavigateCompleteProfile) {
                               Get.to(() => const CompleteProfileScreen());
-                            }else{
-                              Get.offAll(()=> const MainBottomNavScreen());
+                            } else {
+                              Get.offAll(() => const MainBottomNavScreen());
                             }
-
-                          }
-                          else {
+                          } else {
                             Get.showSnackbar(GetSnackBar(
                               duration: const Duration(seconds: 2),
                               isDismissible: true,
@@ -153,6 +151,7 @@ class _VerifyOtpScreenState extends State<VerifyOtpScreen> {
       ),
     ));
   }
+
   @override
   void dispose() {
     _otpTEController.clear();

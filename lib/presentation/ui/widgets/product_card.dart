@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:crafty_bay/data/models/product_model.dart';
 import 'package:crafty_bay/presentation/state_holder/add_to_wishlist_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/wish_list_controller.dart';
@@ -8,7 +10,7 @@ import 'package:get/get.dart';
 import '../../state_holder/remove_wish_list_controller.dart';
 import '../utility/app_colors.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductCard extends StatefulWidget {
   const ProductCard({
     super.key,
     required this.productModel,
@@ -19,11 +21,16 @@ class ProductCard extends StatelessWidget {
   final ProductModel productModel;
 
   @override
+  State<ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<ProductCard> {
+  @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
         Get.to(ProductDetailsScreen(
-          productId: productModel.id!,
+          productId: widget.productModel.id!,
         ));
       },
       borderRadius: BorderRadius.circular(16),
@@ -42,7 +49,7 @@ class ProductCard extends StatelessWidget {
                   topRight: Radius.circular(16),
                 ),
                 child: Image.network(
-                  productModel.image ?? '',
+                  widget.productModel.image ?? '',
                   width: 150,
                   height: 120,
                   fit: BoxFit.cover,
@@ -54,7 +61,7 @@ class ProductCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      productModel.title ?? '',
+                      widget.productModel.title ?? '',
                       maxLines: 1,
                       style: TextStyle(
                         fontSize: 12,
@@ -66,7 +73,7 @@ class ProductCard extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          '\$${productModel.price}',
+                          '৳${widget.productModel.price}',
                           style: const TextStyle(
                             fontSize: 12,
                             color: AppColors.primaryColor,
@@ -83,7 +90,7 @@ class ProductCard extends StatelessWidget {
                               size: 14,
                             ),
                             Text(
-                              productModel.star.toString(),
+                              widget.productModel.star.toString(),
                               style: TextStyle(
                                 fontSize: 12,
                                 color: Colors.grey.shade700,
@@ -95,10 +102,10 @@ class ProductCard extends StatelessWidget {
                         const SizedBox(width: 10),
                         InkWell(
                           onTap: () async {
-                            if (addToWishList) {
+                            if (widget.addToWishList) {
                               bool response =
                                   await Get.find<AddToWishListController>()
-                                      .addToWishList(productModel.id!);
+                                      .addToWishList(widget.productModel.id!);
                               if (response) {
                                 Get.showSnackbar(const GetSnackBar(
                                   title: 'Success',
@@ -118,7 +125,8 @@ class ProductCard extends StatelessWidget {
                                 ));
                               }
                             }
-                            if(addToWishList == false){
+                            if (widget.addToWishList == false) {
+                              // ignore: use_build_context_synchronously
                               showDialog(
                                   context: context,
                                   builder: (BuildContext context) {
@@ -132,10 +140,10 @@ class ProductCard extends StatelessWidget {
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
                             ),
-                            child:  Padding(
+                            child: Padding(
                               padding: const EdgeInsets.all(2.0),
                               child: Icon(
-                                addToWishList == false
+                                widget.addToWishList == false
                                     ? Icons.delete_forever
                                     : Icons.favorite_border_outlined,
                                 size: 16,
@@ -155,6 +163,7 @@ class ProductCard extends StatelessWidget {
       ),
     );
   }
+
   AlertDialog get removeAlertDialog {
     return AlertDialog(
       title: const Text('Remove'),
@@ -168,7 +177,7 @@ class ProductCard extends StatelessWidget {
         TextButton(
             onPressed: () async {
               Get.find<RemoveWishListController>()
-                  .removeWishListItem(productModel.id!);
+                  .removeWishListItem(widget.productModel.id!);
               Get.find<WishListController>()
                   .wishListModel
                   .wishItemList!

@@ -34,7 +34,7 @@ class ReadProfileDataController extends GetxController {
         _isProfileCompleted = true;
       }
       update();
-       return true;
+      return true;
     } else {
       _errorMessage = response.errorMessage;
       update();

@@ -40,7 +40,7 @@ class _WishlistScreenState extends State<WishlistScreen> {
               child: Text('Empty Wish List'),
             ),
             child: Padding(
-              padding: const EdgeInsets.only(left: 12, right: 12,top: 4),
+              padding: const EdgeInsets.only(left: 12, right: 12, top: 4),
               child: GridView.builder(
                 itemCount: controller.wishListModel.wishItemList?.length ?? 0,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

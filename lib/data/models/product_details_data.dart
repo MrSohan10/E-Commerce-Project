@@ -16,17 +16,17 @@ class ProductDetailsData {
 
   ProductDetailsData(
       {this.id,
-        this.img1,
-        this.img2,
-        this.img3,
-        this.img4,
-        this.des,
-        this.color,
-        this.size,
-        this.productId,
-        this.createdAt,
-        this.updatedAt,
-        this.product});
+      this.img1,
+      this.img2,
+      this.img3,
+      this.img4,
+      this.des,
+      this.color,
+      this.size,
+      this.productId,
+      this.createdAt,
+      this.updatedAt,
+      this.product});
 
   ProductDetailsData.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -41,7 +41,7 @@ class ProductDetailsData {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     product =
-    json['product'] != null ? ProductModel.fromJson(json['product']) : null;
+        json['product'] != null ? ProductModel.fromJson(json['product']) : null;
   }
 
   Map<String, dynamic> toJson() {

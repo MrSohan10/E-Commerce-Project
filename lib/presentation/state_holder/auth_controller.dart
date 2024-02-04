@@ -27,7 +27,7 @@ class AuthController extends GetxController {
     return token != null;
   }
 
-  bool get isTokenNotNull => token !=null;
+  bool get isTokenNotNull => token != null;
 
   Future<String?> _getToken() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
@@ -44,13 +44,13 @@ class AuthController extends GetxController {
     }
   }
 
- static Future<void> clearAuthData() async {
+  static Future<void> clearAuthData() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     sharedPreferences.clear();
     token = null;
   }
 
- static Future<void> goToLogin()async {
-    Get.to(()=>const VerifyEmailScreen());
- }
+  static Future<void> goToLogin() async {
+    Get.to(() => const VerifyEmailScreen());
+  }
 }

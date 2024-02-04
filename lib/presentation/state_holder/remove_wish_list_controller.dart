@@ -15,7 +15,9 @@ class RemoveWishListController extends GetxController {
 
   String get errorMessage => _errorMessage;
 
-  Future<bool> removeWishListItem(int productId,) async {
+  Future<bool> removeWishListItem(
+    int productId,
+  ) async {
     bool isSuccess = false;
     _inProgress = true;
     update();

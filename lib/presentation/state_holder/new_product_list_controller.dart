@@ -25,8 +25,7 @@ class NewProductListController extends GetxController {
     final response = await NetworkCaller().getRequest(Urls.newProduct);
     _inProgress = false;
     if (response.isSuccess) {
-      _productListModel =
-          ProductListModel.fromJson(response.responseData);
+      _productListModel = ProductListModel.fromJson(response.responseData);
       isSuccess = true;
     } else {
       _errorMessage = response.errorMessage;

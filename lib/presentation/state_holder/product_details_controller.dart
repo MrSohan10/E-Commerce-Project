@@ -17,13 +17,15 @@ class ProductDetailsController extends GetxController {
 
   ProductDetailsModel _productDetailsModel = ProductDetailsModel();
 
-  ProductDetailsData get productDetails => _productDetailsModel.productDetailsDataList!.first;
+  ProductDetailsData get productDetails =>
+      _productDetailsModel.productDetailsDataList!.first;
 
   Future<bool> getProductDetails(int productId) async {
     bool isSuccess = false;
     _inProgress = true;
     update();
-    final response = await NetworkCaller().getRequest(Urls.productDetails(productId));
+    final response =
+        await NetworkCaller().getRequest(Urls.productDetails(productId));
     _inProgress = false;
     if (response.isSuccess) {
       _productDetailsModel =

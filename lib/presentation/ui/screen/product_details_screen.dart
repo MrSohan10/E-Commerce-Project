@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:crafty_bay/data/models/product_details_data.dart';
 import 'package:crafty_bay/presentation/state_holder/add_to_cart_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/auth_controller.dart';
@@ -13,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:item_count_number_button/item_count_number_button.dart';
 
+import '../../state_holder/add_to_wishlist_controller.dart';
 import '../utility/app_colors.dart';
 import '../widgets/product_details/color_selector.dart';
 
@@ -196,7 +195,9 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
         const SizedBox(width: 16),
         InkWell(
           onTap: () {
-            Get.to(() => const ReviewsScreen());
+            Get.to(() => ReviewsScreen(
+                  productId: widget.productId,
+                ));
           },
           borderRadius: BorderRadius.circular(4),
           child: const Text(
@@ -209,17 +210,40 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
           ),
         ),
         const SizedBox(width: 16),
-        Card(
-          color: AppColors.primaryColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(4),
-          ),
-          child: const Padding(
-            padding: EdgeInsets.all(4.0),
-            child: Icon(
-              Icons.favorite_border_outlined,
-              size: 18,
-              color: Colors.white,
+        InkWell(
+          onTap: () async {
+            bool response = await Get.find<AddToWishListController>()
+                .addToWishList(widget.productId);
+            if (response) {
+              Get.showSnackbar(const GetSnackBar(
+                title: 'Success',
+                message: 'This product has been added to cart',
+                duration: Duration(seconds: 2),
+                isDismissible: true,
+              ));
+            } else {
+              Get.showSnackbar(GetSnackBar(
+                title: 'Add to wishList failed',
+                message: Get.find<AddToWishListController>().errorMessage,
+                duration: const Duration(seconds: 2),
+                isDismissible: true,
+                backgroundColor: Colors.red,
+              ));
+            }
+          },
+          borderRadius: BorderRadius.circular(6),
+          child: Card(
+            color: AppColors.primaryColor,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(4),
+            ),
+            child: const Padding(
+              padding: EdgeInsets.all(4.0),
+              child: Icon(
+                Icons.favorite_border_outlined,
+                size: 18,
+                color: Colors.white,
+              ),
             ),
           ),
         )
@@ -271,10 +295,12 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   onPressed: () async {
                     if (_selectedColor != null && _selectedSize != null) {
                       if (Get.find<AuthController>().isTokenNotNull) {
-                       String stringColor =
-                            colorToString(_selectedColor!);
+                        String stringColor = colorToString(_selectedColor!);
                         final response = await controller.addToCart(
-                            widget.productId, stringColor, _selectedSize!,noOfItem.value);
+                            widget.productId,
+                            stringColor,
+                            _selectedSize!,
+                            noOfItem.value);
                         if (response) {
                           Get.showSnackbar(const GetSnackBar(
                             title: 'Success',

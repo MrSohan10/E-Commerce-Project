@@ -1,3 +1,4 @@
+import 'package:crafty_bay/presentation/state_holder/add_review_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/add_to_cart_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/add_to_wishlist_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/auth_controller.dart';
@@ -14,6 +15,7 @@ import 'package:crafty_bay/presentation/state_holder/product_details_controller.
 import 'package:crafty_bay/presentation/state_holder/product_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/read_profile_data_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/remove_wish_list_controller.dart';
+import 'package:crafty_bay/presentation/state_holder/review_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/send_otp_to_email_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/special_product_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/verify_otp_controller.dart';
@@ -43,5 +45,7 @@ class ControllerBinder extends Bindings {
     Get.put(AddToWishListController());
     Get.put(WishListController());
     Get.put(RemoveWishListController());
+    Get.put(ReviewListController());
+    Get.put(AddReviewController());
   }
 }

@@ -9,7 +9,6 @@ import 'package:crafty_bay/presentation/ui/screen/wishlist_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 
 import '../../state_holder/new_product_list_controller.dart';
 import '../../state_holder/special_product_list_controller.dart';

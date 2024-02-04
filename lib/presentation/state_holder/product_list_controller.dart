@@ -22,11 +22,11 @@ class ProductListController extends GetxController {
     bool isSuccess = false;
     _inProgress = true;
     update();
-    final response = await NetworkCaller().getRequest(Urls.listProductByCategory(id));
+    final response =
+        await NetworkCaller().getRequest(Urls.listProductByCategory(id));
     _inProgress = false;
     if (response.isSuccess) {
-      _productListModel =
-          ProductListModel.fromJson(response.responseData);
+      _productListModel = ProductListModel.fromJson(response.responseData);
       isSuccess = true;
     } else {
       _errorMessage = response.errorMessage;
