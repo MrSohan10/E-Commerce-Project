@@ -1,8 +1,7 @@
+import 'package:crafty_bay/data/models/complete_profile_model.dart';
 import 'package:crafty_bay/data/models/create_profile_params.dart';
 import 'package:crafty_bay/presentation/state_holder/auth_controller.dart';
 import 'package:get/get.dart';
-
-import '../../data/models/profile.dart';
 import '../../data/services/network_caller.dart';
 import '../../data/utility/urls.dart';
 
@@ -15,9 +14,9 @@ class CompleteProfileController extends GetxController {
 
   String get errorMessage => _errorMessage;
 
-  Profile _profile = Profile();
+  CompleteProfileModel _completeProfile = CompleteProfileModel();
 
-  Profile get profile => _profile;
+  CompleteProfileModel get completeProfile => _completeProfile;
 
   Future<bool> createProfileData(
       String token, CreateProfileParams createProfileParams) async {
@@ -27,8 +26,8 @@ class CompleteProfileController extends GetxController {
         token: token, body: createProfileParams.toJson());
     _inProgress = false;
     if (response.isSuccess) {
-      _profile = Profile.fromJson(response.responseData['data']);
-      await Get.find<AuthController>().saveUserDetails(token, _profile);
+      _completeProfile = CompleteProfileModel.fromJson(response.responseData['data']);
+      await Get.find<AuthController>().saveUserDetails(token,null, _completeProfile);
       update();
       return true;
     } else {

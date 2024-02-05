@@ -17,6 +17,7 @@ class VerifyOtpController extends GetxController {
 
   bool get shouldNavigateCompleteProfile => _shouldNavigateCompleteProfile;
   String _token = '';
+
   String get token => _token;
 
   Future<bool> verifyOtp(String email, String otp) async {
@@ -34,7 +35,7 @@ class VerifyOtpController extends GetxController {
             Get.find<ReadProfileDataController>().isProfileCompleted == false;
         if (_shouldNavigateCompleteProfile == false) {
           Get.find<AuthController>().saveUserDetails(
-              _token, Get.find<ReadProfileDataController>().profile);
+              _token, Get.find<ReadProfileDataController>().readProfile,null);
         }
       } else {
         _errorMessage = Get.find<ReadProfileDataController>().errorMessage;

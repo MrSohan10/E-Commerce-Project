@@ -33,6 +33,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
       TextEditingController();
   final TextEditingController _shipCountryTEController =
       TextEditingController();
+  final TextEditingController _shipPhoneTEController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -285,6 +286,24 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                   ],
                 ),
                 const SizedBox(height: 16),
+                TextFormField(
+                  controller: _shipPhoneTEController,
+                  textInputAction: TextInputAction.next,
+                  keyboardType: TextInputType.phone,
+                  decoration: const InputDecoration(
+                      labelText: 'ship phone', hintText: '01XXXXXX245'),
+                  validator: (value) {
+                    if (value!.trim().isEmpty ?? true) {
+                      return 'Enter ship phone number';
+                    } else if (RegExp(r"^(?:(?:\+|00)88|01)?\d{11}$")
+                        .hasMatch(value)) {
+                      return null;
+                    }
+
+                    return 'Enter valid 11 digit number';
+                  },
+                ),
+                const SizedBox(height: 16),
                 GetBuilder<CompleteProfileController>(builder: (controller) {
                   return SizedBox(
                     width: double.infinity,
@@ -295,22 +314,23 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
                         onPressed: () async {
                           if (_formKey.currentState!.validate()) {
                             final createProfileParams = CreateProfileParams(
-                                cusName: _nameTEController.text.trim(),
-                                cusAdd: _addressTEController.text.trim(),
-                                cusCity: _cityTEController.text.trim(),
-                                cusState: _stateTEController.text.trim(),
-                                cusPostcode: _postCodeTEController.text.trim(),
-                                cusCountry: _countryTEController.text.trim(),
-                                cusPhone: _phoneTEController.text.trim(),
-                                cusFax: _faxTEController.text.trim(),
-                                shipName: _shipNameTEController.text.trim(),
-                                shipAdd: _shipAddressTEController.text.trim(),
-                                shipCity: _shipCityTEController.text.trim(),
-                                shipState: _shipStateTEController.text.trim(),
-                                shipPostcode:
-                                    _shipPostCodeTEController.text.trim(),
-                                shipCountry:
-                                    _shipCountryTEController.text.trim());
+                              cusName: _nameTEController.text.trim(),
+                              cusAdd: _addressTEController.text.trim(),
+                              cusCity: _cityTEController.text.trim(),
+                              cusState: _stateTEController.text.trim(),
+                              cusPostcode: _postCodeTEController.text.trim(),
+                              cusCountry: _countryTEController.text.trim(),
+                              cusPhone: _phoneTEController.text.trim(),
+                              cusFax: _faxTEController.text.trim(),
+                              shipName: _shipNameTEController.text.trim(),
+                              shipAdd: _shipAddressTEController.text.trim(),
+                              shipCity: _shipCityTEController.text.trim(),
+                              shipState: _shipStateTEController.text.trim(),
+                              shipPostcode:
+                                  _shipPostCodeTEController.text.trim(),
+                              shipCountry: _shipCountryTEController.text.trim(),
+                              shipPhone: _shipPhoneTEController.text.trim(),
+                            );
                             final bool result =
                                 await controller.createProfileData(
                                     Get.find<VerifyOtpController>().token,
@@ -357,6 +377,7 @@ class _CompleteProfileScreenState extends State<CompleteProfileScreen> {
     _shipStateTEController.clear();
     _shipPostCodeTEController.clear();
     _shipCountryTEController.clear();
+    _shipPhoneTEController.clear();
 
     super.dispose();
   }

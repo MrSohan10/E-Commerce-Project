@@ -13,22 +13,25 @@ class CreateProfileParams {
   final String shipState;
   final String shipPostcode;
   final String shipCountry;
+  final String shipPhone;
 
-  CreateProfileParams(
-      {required this.cusName,
-      required this.cusAdd,
-      required this.cusCity,
-      required this.cusState,
-      required this.cusPostcode,
-      required this.cusCountry,
-      required this.cusPhone,
-      required this.cusFax,
-      required this.shipName,
-      required this.shipAdd,
-      required this.shipCity,
-      required this.shipState,
-      required this.shipPostcode,
-      required this.shipCountry});
+  CreateProfileParams({
+    required this.cusName,
+    required this.cusAdd,
+    required this.cusCity,
+    required this.cusState,
+    required this.cusPostcode,
+    required this.cusCountry,
+    required this.cusPhone,
+    required this.cusFax,
+    required this.shipName,
+    required this.shipAdd,
+    required this.shipCity,
+    required this.shipState,
+    required this.shipPostcode,
+    required this.shipCountry,
+    required this.shipPhone,
+  });
 
   Map<String, dynamic> toJson() => {
         'cus_name': cusName,
@@ -45,5 +48,6 @@ class CreateProfileParams {
         'ship_state': shipState,
         'ship_postcode': shipPostcode,
         'ship_country': shipCountry,
+        'ship_phone': shipPhone,
       };
 }

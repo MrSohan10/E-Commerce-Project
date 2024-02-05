@@ -1,6 +1,6 @@
-import 'package:crafty_bay/data/models/profile.dart';
 import 'package:get/get.dart';
 
+import '../../data/models/read_profile_model.dart';
 import '../../data/services/network_caller.dart';
 import '../../data/utility/urls.dart';
 
@@ -13,10 +13,12 @@ class ReadProfileDataController extends GetxController {
 
   String get errorMessage => _errorMessage;
 
-  Profile _profile = Profile();
-  Profile get profile => _profile;
+  ReadProfileModel _readProfile = ReadProfileModel();
+
+  ReadProfileModel get readProfile => _readProfile;
 
   bool _isProfileCompleted = false;
+
   bool get isProfileCompleted => _isProfileCompleted;
 
   Future<bool> readProfileData(String token) async {
@@ -30,7 +32,7 @@ class ReadProfileDataController extends GetxController {
       if (profileData == null) {
         _isProfileCompleted = false;
       } else {
-        _profile = Profile.fromJson(profileData);
+        _readProfile = ReadProfileModel.fromJson(profileData);
         _isProfileCompleted = true;
       }
       update();
