@@ -3,6 +3,7 @@ import 'package:crafty_bay/presentation/ui/screen/create_review_screen.dart';
 import 'package:crafty_bay/presentation/ui/widgets/center_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import '../../state_holder/auth_controller.dart';
 import '../utility/app_colors.dart';
 import '../widgets/reviews/reviews_card.dart';
 
@@ -94,6 +95,10 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                 shape: const CircleBorder(),
               ),
               onPressed: () {
+                if (Get.find<AuthController>().isTokenNotNull == false) {
+                  AuthController.goToLogin();
+                  return;
+                }
                 Get.to(() => CreateReviewScreen(
                       productId: widget.productId,
                     ));

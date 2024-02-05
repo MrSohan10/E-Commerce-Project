@@ -44,8 +44,8 @@ class AuthController extends GetxController {
   Future<ReadProfileModel?> _getReadProfile() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     final String? rdStrProfile = sharedPreferences.getString('readProfile');
-    log(rdStrProfile.toString());
-    if (rdStrProfile == null.toString()) {
+    final bool result = rdStrProfile.toString() == null.toString();
+    if (result) {
       return null;
     } else {
       return ReadProfileModel.fromJson(jsonDecode(rdStrProfile!));
@@ -55,8 +55,8 @@ class AuthController extends GetxController {
   Future<CompleteProfileModel?> _getCompleteProfile() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
     final String? cmStrProfile = sharedPreferences.getString('completeProfile');
-    if (cmStrProfile == null.toString()) {
-      log(cmStrProfile.toString());
+    final bool result = cmStrProfile.toString() == null.toString();
+    if (result) {
       return null;
     } else {
       return CompleteProfileModel.fromJson(jsonDecode(cmStrProfile!));
