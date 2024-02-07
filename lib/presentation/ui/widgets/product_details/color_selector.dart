@@ -39,14 +39,18 @@ class _ColorSelectorState extends State<ColorSelector> {
               child: Padding(
                 padding: const EdgeInsets.all(4.0),
                 child: CircleAvatar(
-                  radius: 15,
-                  backgroundColor: c,
-                  child: _selectedColor == c
-                      ? const Icon(
-                          Icons.done,
-                          color: Colors.white,
-                        )
-                      : null,
+                  radius: 16,
+                  backgroundColor: Colors.grey,
+                  child: CircleAvatar(
+                    radius: 15,
+                    backgroundColor: c,
+                    child: _selectedColor == c
+                        ?  Icon(
+                            Icons.done,
+                            color: c != Colors.white ? Colors.white : Colors.black
+                          )
+                        : null,
+                  ),
                 ),
               ),
             ),

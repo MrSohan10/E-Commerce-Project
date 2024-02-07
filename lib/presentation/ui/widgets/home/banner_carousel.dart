@@ -1,5 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:crafty_bay/presentation/ui/screen/product_details_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../../../../data/models/home_banner_data.dart';
 import '../../utility/app_colors.dart';
 
@@ -39,45 +41,60 @@ class _BannerCarouselState extends State<BannerCarousel> {
               builder: (BuildContext context) {
                 return Container(
                   width: MediaQuery.of(context).size.width,
-                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                  margin: const EdgeInsets.symmetric(horizontal: 0.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: AppColors.primaryColor,
                   ),
                   alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  child: Stack(
                     children: [
-                      Expanded(
-                          child: Image.network(
-                        banner.image ?? '',
-                      )),
-                      Padding(
-                        padding: const EdgeInsets.all(16.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              banner.title ?? '',
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w500),
-                            ),
-                            const SizedBox(height: 20),
-                            SizedBox(
-                              height: 30,
-                              width: 100,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    padding: EdgeInsets.zero,
-                                    backgroundColor: Colors.white,
-                                    foregroundColor: AppColors.primaryColor),
-                                onPressed: () {},
-                                child: const Text('Buy Now'),
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(8),
+                        child: Image.network(
+                          banner.image ?? '',
+                          height: 180,
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                      Positioned(
+                        top: 20,
+                        left: 10,
+                        child: SizedBox(
+                          height: 180,
+                          width: 190,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                banner.title ?? '',
+                                maxLines: 4,
+                                style: TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.grey.shade800,
+                                    overflow: TextOverflow.ellipsis),
                               ),
-                            )
-                          ],
+                              SizedBox(
+                                height: 30,
+                                width: 100,
+                                child: ElevatedButton(
+                                    onPressed: () {
+                                      Get.to(() => ProductDetailsScreen(
+                                          productId: banner.productId!));
+                                    },
+                                style: ElevatedButton.styleFrom(
+                                  padding:const  EdgeInsets.all(0)
+                                ),
+                                    child: const Text(
+                                      'Buy Now',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700),
+                                    ),
+                                ),
+                              )
+                            ],
+                          ),
                         ),
                       )
                     ],

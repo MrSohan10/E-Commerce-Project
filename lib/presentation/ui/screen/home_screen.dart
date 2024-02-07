@@ -202,29 +202,52 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.white,
       actions: [
         CircleIconButton(
-          ontap: () {
-            AuthController.clearAuthData();
-            Get.offAll(() => const VerifyEmailScreen());
-          },
+          onTap: () {},
           iconData: Icons.person_outline_outlined,
         ),
         const SizedBox(
           width: 8,
         ),
         CircleIconButton(
-          ontap: () {},
+          onTap: () {},
           iconData: Icons.call_outlined,
         ),
         const SizedBox(
           width: 8,
         ),
         CircleIconButton(
-          ontap: () {},
-          iconData: Icons.notifications_active_outlined,
+          onTap: () {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return logOutAlertDialog;
+                });
+          },
+          iconData: Icons.logout_rounded,
         ),
         const SizedBox(
           width: 8,
         ),
+      ],
+    );
+  }
+
+  AlertDialog get logOutAlertDialog {
+    return AlertDialog(
+      title: const Text('LogOut'),
+      content: const Text('Do you want to logout?'),
+      actions: [
+        TextButton(
+            onPressed: () {
+              Get.back();
+            },
+            child: const Text('No')),
+        TextButton(
+            onPressed: () {
+              AuthController.clearAuthData();
+              Get.offAll(() => const VerifyEmailScreen());
+            },
+            child: const Text('Yes')),
       ],
     );
   }

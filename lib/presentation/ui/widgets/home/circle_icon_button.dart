@@ -3,17 +3,18 @@ import 'package:flutter/material.dart';
 class CircleIconButton extends StatelessWidget {
   const CircleIconButton({
     super.key,
-    required this.ontap,
+    required this.onTap,
     required this.iconData,
   });
 
-  final VoidCallback ontap;
+  final VoidCallback onTap;
   final IconData iconData;
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      borderRadius: BorderRadius.circular(15),
-      onTap: ontap,
+      borderRadius: BorderRadius.circular(16),
+      onTap: onTap,
       child: CircleAvatar(
         // radius: 15,
         backgroundColor: Colors.grey.shade200,
