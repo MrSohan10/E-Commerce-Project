@@ -5,6 +5,7 @@ import 'package:crafty_bay/presentation/state_holder/main_bottom_nav_controller.
 import 'package:crafty_bay/presentation/state_holder/popular_product_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/special_product_list_controller.dart';
 import 'package:crafty_bay/presentation/ui/screen/product_list_screen.dart';
+import 'package:crafty_bay/presentation/ui/screen/user_profile_screen.dart';
 import 'package:crafty_bay/presentation/ui/utility/app_colors.dart';
 import 'package:crafty_bay/presentation/ui/utility/assets_path.dart';
 import 'package:crafty_bay/presentation/ui/widgets/center_circular_progress_indicator.dart';
@@ -202,7 +203,9 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: Colors.white,
       actions: [
         CircleIconButton(
-          onTap: () {},
+          onTap: () {
+            Get.to(()=>const UserProfileScreen());
+          },
           iconData: Icons.person_outline_outlined,
         ),
         const SizedBox(
