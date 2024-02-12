@@ -1,4 +1,4 @@
-import 'brand_model.dart';
+import 'brand_data.dart';
 import 'category_data.dart';
 
 class ProductModel {
@@ -16,7 +16,7 @@ class ProductModel {
   int? brandId;
   String? createdAt;
   String? updatedAt;
-  Brand? brand;
+  BrandData? brand;
   CategoryData? category;
 
   ProductModel(
@@ -52,7 +52,7 @@ class ProductModel {
     brandId = json['brand_id'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
-    brand = json['brand'] != null ? Brand.fromJson(json['brand']) : null;
+    brand = json['brand'] != null ? BrandData.fromJson(json['brand']) : null;
     category = json['category'] != null
         ? CategoryData.fromJson(json['category'])
         : null;

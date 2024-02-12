@@ -1,3 +1,4 @@
+import 'package:crafty_bay/presentation/state_holder/brand_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/category_list_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/home_banner_slider_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/main_bottom_nav_controller.dart';
@@ -34,6 +35,7 @@ class _MainBottomNavScreenState extends State<MainBottomNavScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       Get.find<HomeBannerSliderController>().getHomeBannerList();
       Get.find<CategoryListController>().getCategoryList();
+      Get.find<BrandListController>().getBrandList();
       Get.find<PopularProductListController>().getPopularProductList();
       Get.find<SpecialProductListController>().getSpecialProductList();
       Get.find<NewProductListController>().getNewProductList();

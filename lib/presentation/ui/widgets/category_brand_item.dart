@@ -1,3 +1,4 @@
+import 'package:crafty_bay/data/models/brand_data.dart';
 import 'package:crafty_bay/data/models/category_data.dart';
 import 'package:crafty_bay/presentation/ui/screen/product_list_screen.dart';
 import 'package:flutter/material.dart';
@@ -5,21 +6,23 @@ import 'package:get/get.dart';
 
 import '../utility/app_colors.dart';
 
-class CategoryItem extends StatelessWidget {
-  const CategoryItem({
+class CategoryBrandItem extends StatelessWidget {
+  const CategoryBrandItem({
     super.key,
-    required this.categoryData,
+    this.categoryData,
+    this.brandData,
   });
 
-  final CategoryData categoryData;
+  final CategoryData? categoryData;
+  final BrandData? brandData;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
         Get.to(ProductListScreen(
-          title: categoryData.categoryName ?? '',
-          id: categoryData.id,
+          title: categoryData?.categoryName ?? brandData?.brandName ?? '',
+          id: categoryData?.id ?? brandData?.id,
         ));
       },
       child: Column(
@@ -30,13 +33,13 @@ class CategoryItem extends StatelessWidget {
             child: Padding(
                 padding: const EdgeInsets.all(8),
                 child: Image.network(
-                  categoryData.categoryImg ?? '',
+                  categoryData?.categoryImg ?? brandData?.brandImg ?? '',
                   width: 50,
                   height: 50,
                 )),
           ),
           Text(
-            categoryData.categoryName ?? '',
+            categoryData?.categoryName ?? brandData?.brandName ?? '',
             style: const TextStyle(
               fontSize: 16,
               color: AppColors.primaryColor,

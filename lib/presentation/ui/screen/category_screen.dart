@@ -1,5 +1,5 @@
 import 'package:crafty_bay/presentation/state_holder/category_list_controller.dart';
-import 'package:crafty_bay/presentation/ui/widgets/category_item.dart';
+import 'package:crafty_bay/presentation/ui/widgets/category_brand_item.dart';
 import 'package:crafty_bay/presentation/ui/widgets/center_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -40,7 +40,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 ),
                 itemBuilder: (context, index) {
                   return FittedBox(
-                    child: CategoryItem(
+                    child: CategoryBrandItem(
                       categoryData:
                           controller.categoryListModel.categoryDataList![index],
                     ),
