@@ -38,14 +38,4 @@ class ReviewListController extends GetxController {
     return isSuccess;
   }
 
-  int get totalReviews {
-    int total = 0;
-    int length = _reviewListModel.reviewList?.length ?? 0;
-    log(length.toString());
-    for (int i = 1; i <= length; i++) {
-      total++;
-    }
-    log(total.toString());
-    return total;
-  }
 }

@@ -59,7 +59,8 @@ class _ReviewsScreenState extends State<ReviewsScreen> {
                 ),
               ),
             ),
-            totalAndCreateReviewsSection(controller.totalReviews),
+            totalAndCreateReviewsSection(
+                controller.reviewListModel.reviewList?.length??0),
           ],
         );
       }),

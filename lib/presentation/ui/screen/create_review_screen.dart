@@ -1,4 +1,5 @@
 import 'package:crafty_bay/presentation/state_holder/add_review_controller.dart';
+import 'package:crafty_bay/presentation/state_holder/review_list_controller.dart';
 
 import 'package:crafty_bay/presentation/ui/widgets/center_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
@@ -46,7 +47,7 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                   decoration: const InputDecoration(labelText: "product I'D"),
                   validator: (value) {
                     if (value!.trim().isEmpty ?? true) {
-                      return 'Enter First Name';
+                      return 'Enter product id';
                     }
                     return null;
                   },
@@ -60,7 +61,7 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                       labelText: 'Rating', hintText: ' 8/10'),
                   validator: (value) {
                     if (value!.trim().isEmpty ?? true) {
-                      return 'Enter Last Name';
+                      return 'Enter valid rating';
                     }
                     return null;
                   },
@@ -97,6 +98,8 @@ class _CreateReviewScreenState extends State<CreateReviewScreen> {
                             );
                             if (response) {
                               Navigator.pop(context);
+                              Get.find<ReviewListController>()
+                                  .getReviewList(widget.productId);
                             } else {
                               Get.showSnackbar(GetSnackBar(
                                 title: 'Create review failed',

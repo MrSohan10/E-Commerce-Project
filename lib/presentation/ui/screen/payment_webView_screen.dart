@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:crafty_bay/presentation/state_holder/main_bottom_nav_controller.dart';
 import 'package:crafty_bay/presentation/ui/screen/main_bottom_nav_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -29,7 +30,18 @@ class _PaymentWebViewState extends State<PaymentWebView> {
             // Update loading bar.
           },
           onPageStarted: (String url) {},
-          onPageFinished: (String url) {},
+          onPageFinished: (String url) {
+            log('url:$url');
+            if (url.contains('PaymentSuccess')) {
+              log('status:$url');
+              Get.offAll(() => const MainBottomNavScreen());
+              Get.find<MainBottomNavController>().backToHome();
+            } else if (url.contains('PaymentFail')) {
+              log('status:$url');
+              Get.offAll(() => const MainBottomNavScreen());
+              Get.find<MainBottomNavController>().backToHome();
+            }
+          },
           onWebResourceError: (WebResourceError error) {},
           onNavigationRequest: (NavigationRequest request) {
             if (request.url.startsWith('https://www.youtube.com/')) {
@@ -45,11 +57,10 @@ class _PaymentWebViewState extends State<PaymentWebView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appBar,
-      body: WebViewWidget(
-        controller: _webViewController,
-      ),
-    );
+        appBar: appBar,
+        body: WebViewWidget(
+          controller: _webViewController,
+        ));
   }
 
   AppBar get appBar {

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:crafty_bay/data/models/product_model.dart';
 import 'package:crafty_bay/presentation/state_holder/add_to_wishlist_controller.dart';
 import 'package:crafty_bay/presentation/state_holder/wish_list_controller.dart';
