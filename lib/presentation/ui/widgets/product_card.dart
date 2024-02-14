@@ -108,7 +108,7 @@ class _ProductCardState extends State<ProductCard> {
                                 Get.showSnackbar(const GetSnackBar(
                                   title: 'Success',
                                   message:
-                                      'This product has been added to cart',
+                                      'This product has been added to wishList',
                                   duration: Duration(seconds: 2),
                                   isDismissible: true,
                                 ));
