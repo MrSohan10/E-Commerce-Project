@@ -7,17 +7,15 @@ import '../../model/response/response_data.dart';
 
 class NetworkCaller {
   Future<ResponseData> getRequest(String url, {String? token}) async {
-    log(token.toString());
-    log(url);
+    
     final Response response = await get(Uri.parse(url), headers: {
       "token": (token ?? AuthViewModel.token).toString(),
       'Content-type': 'application/json'
     });
     log(response.statusCode.toString());
-    log(response.body.toString());
     if (response.statusCode == 200) {
       final decodeResponse = jsonDecode(response.body);
-      if (decodeResponse['msg'] == 'success') {
+      if (decodeResponse['status'] == 'success') {
         return ResponseData(
           isSuccess: true,
           statusCode: response.statusCode,

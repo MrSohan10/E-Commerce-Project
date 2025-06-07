@@ -1,18 +1,16 @@
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:crafty_bay/view/product/pages/product_details_screen.dart';
+import 'package:crafty_bay/model/home/home_slider_model.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import '../../../model/home/home_banner_data.dart';
 import '../../../core/theme/app_colors.dart';
 
 class BannerCarousel extends StatefulWidget {
   const BannerCarousel({
     super.key,
     this.height,
-    required this.bannerData,
+    required this.sliderData,
   });
 
-  final List<BannerData> bannerData;
+  final List<SliderData> sliderData;
 
   final double? height;
 
@@ -36,7 +34,7 @@ class _BannerCarouselState extends State<BannerCarousel> {
               onPageChanged: (index, reason) {
                 _currentIndex.value = index;
               }),
-          items: widget.bannerData.map((banner) {
+          items: widget.sliderData.map((banner) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
@@ -44,7 +42,6 @@ class _BannerCarouselState extends State<BannerCarousel> {
                   margin: const EdgeInsets.symmetric(horizontal: 0.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: AppColors.primaryColor,
                   ),
                   alignment: Alignment.center,
                   child: Stack(
@@ -52,51 +49,50 @@ class _BannerCarouselState extends State<BannerCarousel> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8),
                         child: Image.network(
-                          banner.image ?? '',
+                          banner.photoUrl ?? '',
                           height: 180,
                           fit: BoxFit.fill,
                         ),
                       ),
-                      Positioned(
-                        top: 20,
-                        left: 10,
-                        child: SizedBox(
-                          height: 180,
-                          width: 190,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                banner.title ?? '',
-                                maxLines: 4,
-                                style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.grey.shade800,
-                                    overflow: TextOverflow.ellipsis),
-                              ),
-                              SizedBox(
-                                height: 30,
-                                width: 100,
-                                child: ElevatedButton(
-                                    onPressed: () {
-                                      Get.to(() => ProductDetailsScreen(
-                                          productId: banner.productId!));
-                                    },
-                                style: ElevatedButton.styleFrom(
-                                  padding:const  EdgeInsets.all(0)
-                                ),
-                                    child: const Text(
-                                      'Buy Now',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.w700),
-                                    ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      )
+                      // Positioned(
+                      //   top: 20,
+                      //   left: 10,
+                      //   child: SizedBox(
+                      //     height: 180,
+                      //     width: 190,
+                      //     child: Column(
+                      //       crossAxisAlignment: CrossAxisAlignment.start,
+                      //       children: [
+                      // Text(
+                      //   banner.description ?? '',
+                      //   maxLines: 4,
+                      //   style: TextStyle(
+                      //       fontSize: 20,
+                      //       fontWeight: FontWeight.w700,
+                      //       color: Colors.grey.shade800,
+                      //       overflow: TextOverflow.ellipsis),
+                      // ),
+                      // SizedBox(
+                      //   height: 30,
+                      //   width: 100,
+                      //   child: ElevatedButton(
+                      //     onPressed: () {
+                      //       Get.to(() => ProductDetailsScreen(
+                      //           productId: banner.sId as int));
+                      //     },
+                      //     style: ElevatedButton.styleFrom(
+                      //         padding: const EdgeInsets.all(0)),
+                      //     child: const Text(
+                      //       'Buy Now',
+                      //       style:
+                      //           TextStyle(fontWeight: FontWeight.w700),
+                      //     ),
+                      //   ),
+                      // )
+                      //       ],
+                      //     ),
+                      //   ),
+                      // )
                     ],
                   ),
                 );
@@ -111,7 +107,7 @@ class _BannerCarouselState extends State<BannerCarousel> {
             return Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                for (int i = 0; i < widget.bannerData.length; i++)
+                for (int i = 0; i < widget.sliderData.length; i++)
                   Container(
                     height: 12,
                     width: 12,

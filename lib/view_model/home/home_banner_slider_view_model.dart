@@ -1,4 +1,5 @@
-import 'package:crafty_bay/model/home/home_banner_list_model.dart';
+
+import 'package:crafty_bay/model/home/home_slider_model.dart';
 import 'package:get/get.dart';
 
 import '../../data/network/network_caller.dart';
@@ -13,9 +14,9 @@ class HomeBannerSliderViewModel extends GetxController {
 
   String get errorMessage => _errorMessage;
 
-  HomeBannerListModel _homeBannerListModel = HomeBannerListModel();
+  HomeSliderModel _homeSliderModel = HomeSliderModel();
 
-  HomeBannerListModel get homeBannerListModel => _homeBannerListModel;
+  HomeSliderModel get homeSliderModel => _homeSliderModel;
 
   Future<bool> getHomeBannerList() async {
     bool isSuccess = false;
@@ -24,8 +25,8 @@ class HomeBannerSliderViewModel extends GetxController {
     final response = await NetworkCaller().getRequest(Urls.homeBannerSlider);
     _inProgress = false;
     if (response.isSuccess) {
-      _homeBannerListModel =
-          HomeBannerListModel.fromJson(response.responseData);
+      _homeSliderModel =
+          HomeSliderModel.fromJson(response.responseData);
       isSuccess = true;
     } else {
       _errorMessage = response.errorMessage;

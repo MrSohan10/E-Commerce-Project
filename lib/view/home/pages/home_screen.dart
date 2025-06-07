@@ -46,8 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       visible: controller.inProgress == false,
                       replacement: const CenterCircularProgressIndication(),
                       child: BannerCarousel(
-                        bannerData:
-                            controller.homeBannerListModel.bannerDataList ?? [],
+                        sliderData:
+                            controller.homeSliderModel.data?.sliderData ?? [],
                       ),
                     );
                   })),
@@ -228,7 +228,4 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
-
-  
-  
 }
