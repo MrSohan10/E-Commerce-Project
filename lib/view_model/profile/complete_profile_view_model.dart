@@ -1,5 +1,5 @@
-import 'package:crafty_bay/models/complete_profile_model.dart';
-import 'package:crafty_bay/models/create_profile_params.dart';
+import 'package:crafty_bay/model/profile/complete_profile_model.dart';
+import 'package:crafty_bay/model/profile/create_profile_params.dart';
 import 'package:crafty_bay/view_model/auth/auth_view_model.dart';
 import 'package:get/get.dart';
 import '../../data/network/network_caller.dart';

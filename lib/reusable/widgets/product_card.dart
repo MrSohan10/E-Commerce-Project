@@ -1,4 +1,4 @@
-import 'package:crafty_bay/models/product_model.dart';
+import 'package:crafty_bay/model/product/product_model.dart';
 import 'package:crafty_bay/view_model/wish_list/add_to_wishlist_view_model.dart';
 import 'package:crafty_bay/view_model/wish_list/wish_list_view_model.dart';
 import 'package:crafty_bay/view/product/pages/product_details_screen.dart';

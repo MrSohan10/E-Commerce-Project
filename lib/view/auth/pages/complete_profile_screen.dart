@@ -1,4 +1,4 @@
-import 'package:crafty_bay/models/create_profile_params.dart';
+import 'package:crafty_bay/model/profile/create_profile_params.dart';
 import 'package:crafty_bay/view_model/profile/complete_profile_view_model.dart';
 import 'package:crafty_bay/view_model/auth/verify_otp_view_model.dart';
 import 'package:crafty_bay/view/main/pages/main_bottom_nav_screen.dart';

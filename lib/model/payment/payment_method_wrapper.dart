@@ -1,4 +1,4 @@
-import 'package:crafty_bay/models/payment_method.dart';
+import 'package:crafty_bay/model/payment/payment_method.dart';
 
 class PaymentMethodWrapper {
   List<PaymentMethod>? paymentMethodList;

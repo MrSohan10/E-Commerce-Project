@@ -1,4 +1,4 @@
-import 'package:crafty_bay/models/cart_item_data.dart';
+import 'package:crafty_bay/model/cart/cart_item_data.dart';
 import 'package:crafty_bay/view_model/cart/cart_list_view_model.dart';
 import 'package:crafty_bay/view_model/cart/delete_cart_list_view_model.dart';
 import 'package:flutter/material.dart';

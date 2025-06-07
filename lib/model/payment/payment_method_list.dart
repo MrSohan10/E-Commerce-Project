@@ -1,4 +1,4 @@
-import 'package:crafty_bay/models/payment_method_wrapper.dart';
+import 'package:crafty_bay/model/payment/payment_method_wrapper.dart';
 
 class PaymentMethodList {
   String? msg;

@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 
-import '../../models/read_profile_model.dart';
+import '../../model/profile/read_profile_model.dart';
 import '../../data/network/network_caller.dart';
 import '../../data/api/api_urls.dart';
 

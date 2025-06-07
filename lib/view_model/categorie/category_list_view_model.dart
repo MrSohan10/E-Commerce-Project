@@ -1,4 +1,4 @@
-import 'package:crafty_bay/models/category_list_model.dart';
+import 'package:crafty_bay/model/categorie/category_list_model.dart';
 import 'package:get/get.dart';
 
 import '../../data/network/network_caller.dart';

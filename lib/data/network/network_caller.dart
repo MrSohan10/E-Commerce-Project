@@ -3,7 +3,7 @@ import 'dart:developer';
 
 import 'package:crafty_bay/view_model/auth/auth_view_model.dart';
 import 'package:http/http.dart';
-import '../../models/response_data.dart';
+import '../../model/response/response_data.dart';
 
 class NetworkCaller {
   Future<ResponseData> getRequest(String url, {String? token}) async {

@@ -1,7 +1,7 @@
 import 'dart:developer';
 
-import 'package:crafty_bay/models/cart_item_data.dart';
-import 'package:crafty_bay/models/cart_list_model.dart';
+import 'package:crafty_bay/model/cart/cart_item_data.dart';
+import 'package:crafty_bay/model/cart/cart_list_model.dart';
 import 'package:crafty_bay/view_model/auth/auth_view_model.dart';
 import 'package:get/get.dart';
 

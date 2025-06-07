@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
 
-import '../../models/review_list_model.dart';
+import '../../model/review/review_list_model.dart';
 import '../../data/network/network_caller.dart';
 import '../../data/api/api_urls.dart';
 import '../auth/auth_view_model.dart';

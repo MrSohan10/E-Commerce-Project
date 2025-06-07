@@ -1,4 +1,4 @@
-import 'package:crafty_bay/models/reviewer_profile.dart';
+import 'package:crafty_bay/model/review/reviewer_profile.dart';
 
 class ReviewData {
   int? id;

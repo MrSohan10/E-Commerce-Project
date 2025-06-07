@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:crafty_bay/models/payment_method_list.dart';
+import 'package:crafty_bay/model/payment/payment_method_list.dart';
 import 'package:crafty_bay/view_model/auth/auth_view_model.dart';
 import 'package:get/get.dart';
 

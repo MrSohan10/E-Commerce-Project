@@ -1,5 +1,5 @@
 
-import 'package:crafty_bay/models/brand_data.dart';
+import 'package:crafty_bay/model/brand/brand_data.dart';
 
 class BrandListModel {
   String? msg;

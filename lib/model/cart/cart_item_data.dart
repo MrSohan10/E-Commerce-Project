@@ -1,4 +1,4 @@
-import 'package:crafty_bay/models/product_model.dart';
+import 'package:crafty_bay/model/product/product_model.dart';
 
 class CartItemData {
   int? id;

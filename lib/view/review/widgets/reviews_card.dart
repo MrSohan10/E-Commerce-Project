@@ -1,4 +1,4 @@
-import 'package:crafty_bay/models/review_data.dart';
+import 'package:crafty_bay/model/review/review_data.dart';
 import 'package:flutter/material.dart';
 
 class ReviewsCard extends StatefulWidget {

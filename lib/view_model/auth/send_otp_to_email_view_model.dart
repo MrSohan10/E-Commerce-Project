@@ -1,4 +1,4 @@
-import 'package:crafty_bay/models/response_data.dart';
+import 'package:crafty_bay/model/response/response_data.dart';
 import 'package:crafty_bay/data/network/network_caller.dart';
 import 'package:crafty_bay/data/api/api_urls.dart';
 import 'package:get/get.dart';

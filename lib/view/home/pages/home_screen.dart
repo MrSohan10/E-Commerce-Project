@@ -9,7 +9,7 @@ import 'package:crafty_bay/core/theme/app_colors.dart';
 import 'package:crafty_bay/reusable/loading/center_circular_progress_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../models/product_model.dart';
+import '../../../model/product/product_model.dart';
 import '../../../view_model/brand/brand_list_view_model.dart';
 import '../../../view_model/product/new_product_list_view_model.dart';
 import '../../../reusable/widgets/category_brand_item.dart';

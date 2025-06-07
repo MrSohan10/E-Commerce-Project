@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:crafty_bay/models/wish_list_model.dart';
+import 'package:crafty_bay/model/wish_list/wish_list_model.dart';
 import 'package:crafty_bay/view_model/auth/auth_view_model.dart';
 import 'package:get/get.dart';
 

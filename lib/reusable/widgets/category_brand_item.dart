@@ -1,5 +1,5 @@
-import 'package:crafty_bay/models/brand_data.dart';
-import 'package:crafty_bay/models/category_data.dart';
+import 'package:crafty_bay/model/brand/brand_data.dart';
+import 'package:crafty_bay/model/categorie/category_data.dart';
 import 'package:crafty_bay/view/product/pages/product_list_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

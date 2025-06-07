@@ -1,4 +1,4 @@
-import 'package:crafty_bay/models/wish_item_data.dart';
+import 'package:crafty_bay/model/wish_list/wish_item_data.dart';
 
 class WishListModel {
   String? msg;

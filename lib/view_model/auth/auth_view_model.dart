@@ -1,6 +1,6 @@
 import 'dart:convert';
-import 'package:crafty_bay/models/complete_profile_model.dart';
-import 'package:crafty_bay/models/read_profile_model.dart';
+import 'package:crafty_bay/model/profile/complete_profile_model.dart';
+import 'package:crafty_bay/model/profile/read_profile_model.dart';
 import 'package:crafty_bay/view/auth/pages/verify_email_screen.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';

@@ -1,5 +1,5 @@
-import 'brand_data.dart';
-import 'category_data.dart';
+import '../brand/brand_data.dart';
+import '../categorie/category_data.dart';
 
 class ProductModel {
   int? id;

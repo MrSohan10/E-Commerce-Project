@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:crafty_bay/view/product/pages/product_details_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../models/home_banner_data.dart';
+import '../../../model/home/home_banner_data.dart';
 import '../../../core/theme/app_colors.dart';
 
 class BannerCarousel extends StatefulWidget {
