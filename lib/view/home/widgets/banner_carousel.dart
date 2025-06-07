@@ -47,7 +47,7 @@ class _BannerCarouselState extends State<BannerCarousel> {
                   child: Stack(
                     children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(4),
                         child: Image.network(
                           banner.photoUrl ?? '',
                           height: 180,
