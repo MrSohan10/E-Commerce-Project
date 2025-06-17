@@ -1,4 +1,4 @@
-import 'package:crafty_bay/model/categorie/category_list_model.dart';
+import 'package:crafty_bay/model/categorie/categorie_model.dart';
 import 'package:get/get.dart';
 
 import '../../data/network/network_caller.dart';
@@ -13,9 +13,9 @@ class CategoryListViewModel extends GetxController {
 
   String get errorMessage => _errorMessage;
 
-  CategoryListModel _categoryListModel = CategoryListModel();
+  CategoriesModel _categoriesModel = CategoriesModel();
 
-  CategoryListModel get categoryListModel => _categoryListModel;
+  CategoriesModel get categoriesModel => _categoriesModel;
 
   Future<bool> getCategoryList() async {
     bool isSuccess = false;
@@ -24,7 +24,7 @@ class CategoryListViewModel extends GetxController {
     final response = await NetworkCaller().getRequest(Urls.categoryList);
     _inProgress = false;
     if (response.isSuccess) {
-      _categoryListModel = CategoryListModel.fromJson(response.responseData);
+      _categoriesModel = CategoriesModel.fromJson(response.responseData);
       isSuccess = true;
     } else {
       _errorMessage = response.errorMessage;

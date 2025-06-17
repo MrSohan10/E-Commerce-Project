@@ -8,13 +8,13 @@ class Urls {
   static String readProfile = "$_baseUrl/ReadProfile";
   static String createProfile = "$_baseUrl/CreateProfile";
   static String homeBannerSlider = "$_baseUrl/slides";
-  static String categoryList = "$_baseUrl/CategoryList";
+  static String categoryList = "$_baseUrl/categories";
   static String brandyList = "$_baseUrl/BrandList";
   static String popularProduct = "$_baseUrl/ListProductByRemark/Popular";
   static String specialProduct = "$_baseUrl/ListProductByRemark/Special";
   static String newProduct = "$_baseUrl/ListProductByRemark/New";
 
-  static String listProductByCategory(int id) =>
+  static String listProductByCategory(String id) =>
       "$_baseUrl/ListProductByCategory/$id";
 
   static String productDetails(int productId) =>

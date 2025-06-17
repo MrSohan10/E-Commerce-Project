@@ -44,22 +44,5 @@ class ProductDetailsData {
         json['product'] != null ? ProductModel.fromJson(json['product']) : null;
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['img1'] = img1;
-    data['img2'] = img2;
-    data['img3'] = img3;
-    data['img4'] = img4;
-    data['des'] = des;
-    data['color'] = color;
-    data['size'] = size;
-    data['product_id'] = productId;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    if (product != null) {
-      data['product'] = product!.toJson();
-    }
-    return data;
-  }
+
 }

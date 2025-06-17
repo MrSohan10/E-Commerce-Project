@@ -17,7 +17,7 @@ class ProductListViewModel extends GetxController {
 
   ProductListModel get productListModel => _productListModel;
 
-  Future<bool> getProductList({required int id}) async {
+  Future<bool> getProductList({required String id}) async {
     bool isSuccess = false;
     _inProgress = true;
     update();

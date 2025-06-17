@@ -26,16 +26,5 @@ class WishItemData {
         json['product'] != null ? ProductModel.fromJson(json['product']) : null;
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['product_id'] = productId;
-    data['user_id'] = userId;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    if (product != null) {
-      data['product'] = product!.toJson();
-    }
-    return data;
-  }
+  
 }

@@ -137,11 +137,11 @@ class _HomeScreenState extends State<HomeScreen> {
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             itemCount:
-                controller.categoryListModel.categoryDataList?.length ?? 0,
+                controller.categoriesModel.data?.categorieData?.length ?? 0,
             itemBuilder: (context, index) {
               return CategoryBrandItem(
                 categoryData:
-                    controller.categoryListModel.categoryDataList![index],
+                    controller.categoriesModel.data?.categorieData?[index],
               );
             },
             separatorBuilder: (_, __) {

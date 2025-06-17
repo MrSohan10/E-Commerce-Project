@@ -31,7 +31,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               replacement: const CenterCircularProgressIndication(),
               child: GridView.builder(
                 itemCount:
-                    controller.categoryListModel.categoryDataList?.length ?? 0,
+                    controller.categoriesModel.data?.categorieData?.length ?? 0,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 4,
                   crossAxisSpacing: 5,
@@ -42,7 +42,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                   return FittedBox(
                     child: CategoryBrandItem(
                       categoryData:
-                          controller.categoryListModel.categoryDataList![index],
+                          controller.categoriesModel.data?.categorieData?[index],
                     ),
                   );
                 },

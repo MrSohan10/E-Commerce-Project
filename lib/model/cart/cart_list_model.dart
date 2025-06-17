@@ -16,12 +16,5 @@ class CartListModel {
     }
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['msg'] = msg;
-    if (cartItemList != null) {
-      data['data'] = cartItemList!.map((v) => v.toJson()).toList();
-    }
-    return data;
-  }
+ 
 }

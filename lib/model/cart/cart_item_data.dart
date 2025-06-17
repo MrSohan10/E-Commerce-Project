@@ -38,20 +38,5 @@ class CartItemData {
         json['product'] != null ? ProductModel.fromJson(json['product']) : null;
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['user_id'] = userId;
-    data['product_id'] = productId;
-    data['color'] = color;
-    data['size'] = size;
-    data['qty'] = qty;
-    data['price'] = price;
-    data['created_at'] = createdAt;
-    data['updated_at'] = updatedAt;
-    if (product != null) {
-      data['product'] = product!.toJson();
-    }
-    return data;
-  }
+ 
 }

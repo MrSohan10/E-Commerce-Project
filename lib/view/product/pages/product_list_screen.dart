@@ -9,7 +9,7 @@ class ProductListScreen extends StatefulWidget {
   const ProductListScreen({super.key, this.title, this.id});
 
   final String? title;
-  final int? id;
+  final String? id;
   @override
   State<ProductListScreen> createState() => _ProductListScreenState();
 }
